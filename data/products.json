@@ -1,0 +1,591 @@
+[
+  {
+    "id": "prod-1",
+    "code": "C-1",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "filet",
+    "title": "Filet de merluza rebozado",
+    "image": "/catalog/Filet de merluza rebozado pre frito C1.webp",
+    "packSize": "2.5kg",
+    "packs": [
+      "2.5kg",
+      "6kg"
+    ],
+    "cals": 155,
+    "porciones": 8,
+    "coccion": {
+      "label": "Horno",
+      "val": "12",
+      "unit": "min"
+    },
+    "attr": "Capturado en el Atlántico Sur"
+  },
+  {
+    "id": "prod-2",
+    "code": "CC-1",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "filet",
+    "title": "Filet de merluza crocante con finas hierbas",
+    "image": "/catalog/Filet de merluza crocante finas hierbas CC1.webp",
+    "packSize": "2.5kg",
+    "packs": [
+      "2.5kg",
+      "6kg"
+    ],
+    "cals": 165,
+    "porciones": 8,
+    "coccion": {
+      "label": "Horno",
+      "val": "12",
+      "unit": "min"
+    },
+    "attr": "Crocante natural · finas hierbas"
+  },
+  {
+    "id": "prod-3",
+    "code": "CR-1",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "filet",
+    "title": "Filet de merluza a la romana con provenzal",
+    "packSize": "2.5kg",
+    "packs": [
+      "2.5kg",
+      "6kg"
+    ],
+    "cals": 170,
+    "porciones": 8,
+    "coccion": {
+      "label": "Sartén",
+      "val": "8",
+      "unit": "min"
+    },
+    "attr": "Provenzal incluida · lista para servir"
+  },
+  {
+    "id": "prod-4",
+    "code": "C-2",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "medallon",
+    "title": "Medallón de merluza rebozado",
+    "image": "/catalog/Medallon de merluza rebozado pre frito C2.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 150,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Filete entero, no reconstituido"
+  },
+  {
+    "id": "prod-5",
+    "code": "CC-2",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "medallon",
+    "title": "Medallón de merluza crocante",
+    "image": "/catalog/Medallon de merluza crocante CC2.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 160,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Rebozado crocante · sin amasado"
+  },
+  {
+    "id": "prod-6",
+    "code": "CF-2",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "medallon",
+    "title": "Medallón de merluza a las finas hierbas",
+    "image": "/catalog/Medallon de merluza finas hierbas CF2.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 160,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Finas hierbas · aroma intenso"
+  },
+  {
+    "id": "prod-7",
+    "code": "C-3",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "medallon",
+    "title": "Medallón de merluza con espinaca",
+    "image": "/catalog/Medallon de merluza c espinaca C3.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 155,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Con espinaca natural · sin colorantes"
+  },
+  {
+    "id": "prod-8",
+    "code": "CR-7",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "medallon",
+    "title": "Medallón de merluza con roquefort",
+    "image": "/catalog/Medallon de merluza con roquefort rebozado pre frito CR7.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 175,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Intenso sabor · formato gourmet"
+  },
+  {
+    "id": "prod-9",
+    "code": "EQ-7",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "medallon",
+    "title": "Medallón de merluza con espinaca y queso",
+    "image": "/catalog/Medallon de merluza con espinaca y queso rebozado EQ7.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 165,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Combinación clásica · queso fundente"
+  },
+  {
+    "id": "prod-10",
+    "code": "B-8",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "medallon",
+    "title": "Medallón de merluza con brócoli",
+    "image": "/catalog/Medallón de merluza con brocoli B8 2.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 155,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Con verdura natural · sin conservantes"
+  },
+  {
+    "id": "prod-11",
+    "code": "V-9",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "medallon",
+    "title": "Medallón de merluza primavera",
+    "image": "/catalog/Medallon de merluza primavera V9.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 150,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Mix de verduras de temporada"
+  },
+  {
+    "id": "prod-12",
+    "code": "B-10",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "barrita",
+    "title": "Barritas de merluza",
+    "image": "/catalog/Barritas de merluza rebozado pre frito B10-.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 120,
+    "porciones": 12,
+    "coccion": {
+      "label": "Horno",
+      "val": "12",
+      "unit": "min"
+    },
+    "attr": "Formato infantil · ideal para niños"
+  },
+  {
+    "id": "prod-13",
+    "code": "R-30",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "raba",
+    "title": "Rabas de calamar rebozadas",
+    "image": "/catalog/Rabas de calamar R30.webp",
+    "packSize": "2kg",
+    "packs": [
+      "2kg",
+      "4kg"
+    ],
+    "cals": 185,
+    "porciones": 8,
+    "coccion": {
+      "label": "Fritura",
+      "val": "3",
+      "unit": "min"
+    },
+    "attr": "Mar argentino · pesca responsable"
+  },
+  {
+    "id": "prod-14",
+    "code": "R-31",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "raba",
+    "title": "Rabas de calamar a la romana con provenzal",
+    "packSize": "2kg",
+    "packs": [
+      "2kg",
+      "4kg"
+    ],
+    "cals": 190,
+    "porciones": 8,
+    "coccion": {
+      "label": "Fritura",
+      "val": "3",
+      "unit": "min"
+    },
+    "attr": "Provenzal incluida · sabor mediterráneo"
+  },
+  {
+    "id": "prod-15",
+    "code": "L-1",
+    "cat": "pescado",
+    "badge": "Pescado",
+    "shape": "langostino",
+    "title": "Langostino rebozado pre frito",
+    "image": "/catalog/Langostinos rebozados L1 (2).webp",
+    "packSize": "2.5kg",
+    "packs": [
+      "2.5kg",
+      "5kg"
+    ],
+    "cals": 140,
+    "porciones": 10,
+    "coccion": {
+      "label": "Fritura",
+      "val": "3",
+      "unit": "min"
+    },
+    "attr": "Premium · pesca artesanal"
+  },
+  {
+    "id": "prod-16",
+    "code": "BM-40",
+    "cat": "bocaditos",
+    "badge": "Bocaditos",
+    "shape": "barrita-mozza",
+    "title": "Barritas de mozzarella pre fritas",
+    "image": "/catalog/Barritas de muza BM40.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 220,
+    "porciones": 12,
+    "coccion": {
+      "label": "Fritura",
+      "val": "3",
+      "unit": "min"
+    },
+    "attr": "Mozzarella fundente · cobertura crocante"
+  },
+  {
+    "id": "prod-17",
+    "code": "BM-41",
+    "cat": "bocaditos",
+    "badge": "Bocaditos",
+    "shape": "barrita-mozza",
+    "title": "Barritas de mozzarella crocantes con finas hierbas",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 225,
+    "porciones": 12,
+    "coccion": {
+      "label": "Fritura",
+      "val": "3",
+      "unit": "min"
+    },
+    "attr": "Finas hierbas · queso que se estira"
+  },
+  {
+    "id": "prod-18",
+    "code": "BC-7",
+    "cat": "bocaditos",
+    "badge": "Bocaditos",
+    "shape": "bocadito",
+    "title": "Bocaditos de espinaca y mozzarella",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 180,
+    "porciones": 12,
+    "coccion": {
+      "label": "Horno",
+      "val": "12",
+      "unit": "min"
+    },
+    "attr": "Relleno cremoso · sin TACC"
+  },
+  {
+    "id": "prod-19",
+    "code": "MP-80",
+    "cat": "pollo",
+    "badge": "Pollo",
+    "shape": "medallon-pollo",
+    "title": "Medallón de pollo",
+    "image": "/catalog/Medallon de pollo rebozado MP80.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 195,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "100% pechuga · sin amasado"
+  },
+  {
+    "id": "prod-20",
+    "code": "MP-81",
+    "cat": "pollo",
+    "badge": "Pollo",
+    "shape": "medallon-pollo",
+    "title": "Medallón de pollo con jamón y mozzarella",
+    "image": "/catalog/Medallon de pollo c jym MP81.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 230,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Cordon bleu clásico · sabor inigualable"
+  },
+  {
+    "id": "prod-21",
+    "code": "MP-83",
+    "cat": "pollo",
+    "badge": "Pollo",
+    "shape": "medallon-pollo",
+    "title": "Medallón de pollo con espinaca",
+    "image": "/catalog/Medallon de pollo con espinaca MP83.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 200,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Pollo natural · con verdura"
+  },
+  {
+    "id": "prod-22",
+    "code": "FP-85",
+    "cat": "pollo",
+    "badge": "Pollo",
+    "shape": "formita",
+    "title": "Formitas de pollo",
+    "image": "/catalog/Formitas de pollo FP85.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 195,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Formato divertido · toda la familia"
+  },
+  {
+    "id": "prod-23",
+    "code": "FP-86",
+    "cat": "pollo",
+    "badge": "Pollo",
+    "shape": "formita",
+    "title": "Formitas de pollo con jamón y mozzarella",
+    "image": "/catalog/Formitas de pollo c jym FP86.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 230,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Rellenas · sabor irresistible"
+  },
+  {
+    "id": "prod-24",
+    "code": "FP-87",
+    "cat": "pollo",
+    "badge": "Pollo",
+    "shape": "formita",
+    "title": "Formitas de pollo con queso cheddar",
+    "image": "/catalog/formitas de pollo c chedar FP87.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 240,
+    "porciones": 10,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Cheddar fundente · crocante por fuera"
+  },
+  {
+    "id": "prod-25",
+    "code": "DP-88",
+    "cat": "pollo",
+    "badge": "Pollo",
+    "shape": "barrita",
+    "title": "Deditos de pollo crocantes a las finas hierbas",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 195,
+    "porciones": 12,
+    "coccion": {
+      "label": "Horno",
+      "val": "12",
+      "unit": "min"
+    },
+    "attr": "Finas hierbas · formato snack"
+  },
+  {
+    "id": "prod-26",
+    "code": "CN-50",
+    "cat": "pollo",
+    "badge": "Pollo",
+    "shape": "nugget",
+    "title": "Nuggets de pollo crocante",
+    "image": "/catalog/Nuggets crocantes CN50.webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 210,
+    "porciones": 12,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Pollo 100% pechuga · sin conservantes"
+  },
+  {
+    "id": "prod-27",
+    "code": "CN-57",
+    "cat": "pollo",
+    "badge": "Pollo",
+    "shape": "nugget",
+    "title": "Nuggets de pollo crocante con cheddar",
+    "image": "/catalog/Nuggetes con chedar CN57 .webp",
+    "packSize": "3kg",
+    "packs": [
+      "3kg",
+      "6kg"
+    ],
+    "cals": 225,
+    "porciones": 12,
+    "coccion": {
+      "label": "Horno",
+      "val": "14",
+      "unit": "min"
+    },
+    "attr": "Cheddar fundente · doble disfrute"
+  }
+]
