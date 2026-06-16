@@ -6,10 +6,11 @@ import ProductCard from './ProductCard'
 type CatalogFullProps = {
   id?: string
   showHead?: boolean
+  initialCat?: string
 }
 
-export default function CatalogFull({ id, showHead = true }: CatalogFullProps) {
-  const [activeCat, setActiveCat] = useState('all')
+export default function CatalogFull({ id, showHead = true, initialCat = 'all' }: CatalogFullProps) {
+  const [activeCat, setActiveCat] = useState(initialCat)
   const [openCard,  setOpenCard]  = useState<string | null>(null)
 
   useEffect(() => {

@@ -1,16 +1,71 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import './globals.css'
+import { BUSINESS, DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, DEFAULT_TITLE, SITE_NAME, SITE_URL } from './lib/seo'
 
 export const metadata: Metadata = {
-  title: 'Congelados Formitas — Mar del Plata',
-  description: 'Rebozados congelados de Mar del Plata. Abrí el freezer, solucionaste la cena.',
-  keywords: 'congelados, rebozados, mar del plata, formitas, nuggets, milanesas',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: DEFAULT_TITLE,
+    template: `%s — ${SITE_NAME}`,
+  },
+  description: DEFAULT_DESCRIPTION,
+  keywords: [
+    'congelados',
+    'rebozados congelados',
+    'rebozados Mar del Plata',
+    'distribuidor congelados AMBA',
+    'nuggets de pollo congelados',
+    'medallones de merluza congelados',
+    'formitas',
+  ],
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: 'Congelados Formitas',
-    description: 'Rebozados artesanales de Mar del Plata',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: 'es_AR',
     type: 'website',
+    images: [DEFAULT_OG_IMAGE],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [DEFAULT_OG_IMAGE.url],
+  },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION,
   },
 }
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['Organization', 'LocalBusiness'],
+  name: BUSINESS.name,
+  url: BUSINESS.url,
+  logo: BUSINESS.logo,
+  image: `${SITE_URL}${DEFAULT_OG_IMAGE.url}`,
+  telephone: BUSINESS.telephone,
+  email: BUSINESS.email,
+  foundingDate: BUSINESS.foundingDate,
+  address: BUSINESS.address,
+  openingHours: BUSINESS.openingHours,
+  sameAs: BUSINESS.sameAs,
+  areaServed: {
+    '@type': 'AdministrativeArea',
+    name: 'Costa Atlántica y AMBA, Argentina',
+  },
+}
+
+const gaId = process.env.NEXT_PUBLIC_GA_ID
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -28,8 +83,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {gaId && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} strategy="afterInteractive" />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaId}');
+              `}
+            </Script>
+          </>
+        )}
+      </body>
     </html>
   )
 }

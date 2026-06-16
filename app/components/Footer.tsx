@@ -17,9 +17,9 @@ export default function Footer() {
         <nav className="footer__cols">
           <div>
             <h4>Productos</h4>
-            <Link href="/catalogo">Pollo</Link>
-            <Link href="/catalogo">Pescado</Link>
-            <Link href="/catalogo">Bocaditos</Link>
+            <Link href="/catalogo/pollo">Pollo</Link>
+            <Link href="/catalogo/pescado">Pescado</Link>
+            <Link href="/catalogo/bocaditos">Bocaditos</Link>
             <Link href="/catalogo">Catálogo completo</Link>
           </div>
           <div>

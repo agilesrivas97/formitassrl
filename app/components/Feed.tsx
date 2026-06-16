@@ -25,8 +25,16 @@ export default function Feed() {
       </header>
       <div className="feed__grid">
         {TILES.map(tile => (
-          <a key={tile.img} className={`tile ${tile.cls}`} href="#" data-cursor="grow">
-            <div className="tile__art" style={{ backgroundImage: `url(${tile.img})` }} />
+          <a
+            key={tile.img}
+            className={`tile ${tile.cls}`}
+            href="https://instagram.com/rebozaditospop"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${tile.cap} — ver en Instagram @rebozaditospop`}
+            data-cursor="grow"
+          >
+            <div className="tile__art" style={{ backgroundImage: `url(${tile.img})` }} role="img" aria-label={tile.cap} />
             <div className="tile__overlay">
               <IGIcon />
               <span>Ver en Instagram</span>
