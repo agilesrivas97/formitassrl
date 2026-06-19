@@ -241,17 +241,14 @@ html.intro-seen .inmersiva { display: none; }
 .hotspot__glass img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block; }
 
 @media (max-width: 768px) {
-  /* .inmersiva sigue ocupando toda la pantalla (100vw/100dvh, sin scroll), pero el
-     marco del video se achica un poco y queda centrado con margen a los 4 lados —
-     así se ve "alejado" (el frame completo, sin recortar) en vez de pegado a los bordes. */
-  .inmersiva__frame { width: min(88vw, calc(88dvh * 16 / 9)); height: min(88dvh, calc(88vw * 9 / 16)); border-radius: 22px; overflow: hidden; }
-
   .inmersiva__cta-icon { width: 52px; height: 52px; }
   .inmersiva__skip { font-size: .65rem; padding: .5rem .9rem; }
 
-  /* Mientras hay una card abierta, los botones flotantes quedan tapados por la
-     bandeja inferior — se ocultan para no competir/superponerse. */
-  .inmersiva__frame[data-card-open="true"] .inmersiva__enter,
+  /* En celular solo existe "Saltar" — "Entrar al sitio" nunca se muestra. */
+  .inmersiva__enter { display: none; }
+
+  /* Mientras hay una card abierta, el botón de saltar queda tapado por la
+     bandeja inferior — se oculta para no competir/superponerse. */
   .inmersiva__frame[data-card-open="true"] .inmersiva__skip {
     opacity: 0; pointer-events: none;
   }
