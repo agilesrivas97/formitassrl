@@ -156,6 +156,7 @@ export default function Inmersiva() {
       )}
 
       <div className={`inmersiva__curtain${shut ? ' is-shut' : ''}${closeStage === 'shut' ? ' show-logo' : ''}`}>
+        <span className="inmersiva__curtain-circle" aria-hidden="true" />
         <img className="inmersiva__curtain-logo" src="/logos/rebozaditos.png" alt="" aria-hidden="true" />
       </div>
     </section>

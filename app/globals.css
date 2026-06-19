@@ -277,21 +277,36 @@ html.intro-seen .inmersiva {
 /* Transición de salida: un círculo negro (iris) crece desde el centro hasta tapar
    toda la pantalla, se ve el logo un instante, y luego el mismo círculo se achica
    de nuevo dejando ver la web real debajo (montada detrás de .inmersiva todo este
-   tiempo). Queda montado desde el primer render con radio 0% para que el cambio a
-   "is-shut" sí dispare la transición de clip-path (si se monta ya con la clase, el
-   navegador no anima el primer pintado). */
+   tiempo). Se anima con transform:scale en vez de clip-path: clip-path no siempre
+   va por GPU en Chrome de Android y la transición queda trabada/se salta; un
+   transform escalado sí se acelera por hardware en todos los navegadores. Queda
+   montado desde el primer render con scale(0) para que el cambio a "is-shut" sí
+   dispare la transición (si se monta ya con la clase, el navegador no anima el
+   primer pintado). */
 .inmersiva__curtain {
   position: absolute;
   inset: 0;
   z-index: 50;
   pointer-events: none;
-  background: #000;
-  clip-path: circle(0% at 50% 50%);
-  transition: clip-path .55s var(--ease-out);
+  overflow: hidden;
 }
 
-.inmersiva__curtain.is-shut {
-  clip-path: circle(150% at 50% 50%);
+.inmersiva__curtain-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6vmax;
+  height: 6vmax;
+  margin: -3vmax 0 0 -3vmax;
+  border-radius: 50%;
+  background: #000;
+  transform: scale(0);
+  transition: transform .55s var(--ease-out);
+  will-change: transform;
+}
+
+.inmersiva__curtain.is-shut .inmersiva__curtain-circle {
+  transform: scale(60);
 }
 
 .inmersiva__curtain-logo {
