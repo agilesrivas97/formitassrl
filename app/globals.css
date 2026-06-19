@@ -131,9 +131,25 @@ html.intro-seen .inmersiva { display: none; }
   position: fixed; inset: 0; z-index: 999;
   height: 100vh; height: 100dvh; width: 100%; background: var(--blue-deep);
   display: flex; align-items: center; justify-content: center; overflow: hidden;
-  opacity: 1; transition: opacity .5s var(--ease-out), transform .5s var(--ease-out);
 }
-.inmersiva.is-leaving { opacity: 0; transform: scale(1.03); pointer-events: none; }
+
+/* Transición de salida: dos cortinas negras (arriba/abajo) se cierran hasta tapar
+   toda la pantalla, se ve el logo un instante, y luego se vuelven a abrir dejando
+   la web real debajo (que ya está montada detrás de .inmersiva todo este tiempo). */
+.inmersiva__curtain { position: absolute; inset: 0; z-index: 50; pointer-events: none; }
+.inmersiva__curtain-half {
+  position: absolute; left: 0; right: 0; height: 51%; background: #000;
+  transition: transform .5s var(--ease-out);
+}
+.inmersiva__curtain-half--top { top: 0; transform: translateY(-100%); }
+.inmersiva__curtain-half--bottom { bottom: 0; transform: translateY(100%); }
+.inmersiva__curtain.is-shut .inmersiva__curtain-half { transform: translateY(0); }
+.inmersiva__curtain-logo {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: clamp(120px, 22vw, 200px); height: auto; opacity: 0;
+  transition: opacity .3s var(--ease-out);
+}
+.inmersiva__curtain.show-logo .inmersiva__curtain-logo { opacity: 1; }
 /* Ocupa el 100% de la pantalla en cualquier dispositivo. El video (16:9) se recorta con
    object-fit:cover; como los 3 hotspots están centrados horizontalmente, en pantallas
    angostas (mobile) el recorte cae a los costados y la columna vertical de estantes
@@ -194,18 +210,11 @@ html.intro-seen .inmersiva { display: none; }
   display: flex; align-items: center; justify-content: center;
 }
 .hotspot.is-active { z-index: 10; }
-.hotspot::before {
-  content: ''; width: 18px; height: 18px; border-radius: 50%;
-  background: rgba(255,255,255,.25); border: 1.5px solid rgba(255,255,255,.85);
-  box-shadow: 0 0 0 2px rgba(10,60,130,.5);
-}
 .hotspot__dot {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-  width: 7px; height: 7px; border-radius: 50%; background: var(--cream);
+  width: 9px; height: 9px; border-radius: 50%; background: var(--cream);
+  box-shadow: 0 0 0 1px rgba(10,60,130,.5), 0 1px 4px rgba(0,0,0,.35);
   animation: heroPulse 1.8s var(--ease-out) infinite;
 }
-.hotspot__ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--cream); animation: hotspotRing 2.2s var(--ease-out) infinite; }
-@keyframes hotspotRing { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
 
 /* Tarjeta única, hermana de los puntos (no anidada dentro de .hotspot): un ancestro
    con transform "atrapa" a los descendientes position:fixed, así que para que la
@@ -246,12 +255,6 @@ html.intro-seen .inmersiva { display: none; }
 
   /* En celular solo existe "Saltar" — "Entrar al sitio" nunca se muestra. */
   .inmersiva__enter { display: none; }
-
-  /* Mientras hay una card abierta, el botón de saltar queda tapado por la
-     bandeja inferior — se oculta para no competir/superponerse. */
-  .inmersiva__frame[data-card-open="true"] .inmersiva__skip {
-    opacity: 0; pointer-events: none;
-  }
 
   /* La franja de video queda corta en pantallas verticales: no hay lugar para
      popovers flotantes junto a cada punto, así que la tarjeta se muestra como
