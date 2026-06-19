@@ -19,7 +19,7 @@ export default function Footer() {
             <h4>Productos</h4>
             <Link href="/catalogo/pollo">Pollo</Link>
             <Link href="/catalogo/pescado">Pescado</Link>
-            <Link href="/catalogo/bocaditos">Bocaditos</Link>
+            <Link href="/catalogo/especiales">Especiales</Link>
             <Link href="/catalogo">Catálogo completo</Link>
           </div>
           <div>

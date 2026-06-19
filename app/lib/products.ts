@@ -1,9 +1,9 @@
 import rawProducts from '../../data/products.json'
 
 export const CAT_TINTS: Record<string, string> = {
-  pollo:     '#F5A623',
-  pescado:   '#0B5C8F',
-  bocaditos: '#E8440A',
+  pollo:      '#F5A623',
+  pescado:    '#0B5C8F',
+  especiales: '#E8440A',
 }
 
 export type ProdData = {
@@ -22,8 +22,8 @@ export const PRODUCTS: Prod[] = (rawProducts as ProdData[]).map(p => ({
 }))
 
 export const PILLS = [
-  { id: 'all',       label: 'Todo',      accent: undefined },
-  { id: 'pollo',     label: 'Pollo',     accent: '#F5A623' },
-  { id: 'pescado',   label: 'Pescado',   accent: '#0B5C8F' },
-  { id: 'bocaditos', label: 'Bocaditos', accent: '#E8440A' },
+  { id: 'all',        label: 'Todo',       accent: undefined },
+  { id: 'pollo',      label: 'Pollo',      accent: '#F5A623' },
+  { id: 'pescado',    label: 'Pescado',    accent: '#0B5C8F' },
+  { id: 'especiales', label: 'Especiales', accent: '#E8440A' },
 ]

@@ -330,8 +330,8 @@
   {
     "id": "prod-16",
     "code": "BM-40",
-    "cat": "bocaditos",
-    "badge": "Bocaditos",
+    "cat": "especiales",
+    "badge": "Especiales",
     "shape": "barrita-mozza",
     "title": "Barritas de mozzarella pre fritas",
     "image": "/catalog/Barritas de muza BM40.webp",
@@ -352,8 +352,8 @@
   {
     "id": "prod-17",
     "code": "BM-41",
-    "cat": "bocaditos",
-    "badge": "Bocaditos",
+    "cat": "especiales",
+    "badge": "Especiales",
     "shape": "barrita-mozza",
     "title": "Barritas de mozzarella crocantes con finas hierbas",
     "packSize": "3kg",
@@ -373,8 +373,8 @@
   {
     "id": "prod-18",
     "code": "BC-7",
-    "cat": "bocaditos",
-    "badge": "Bocaditos",
+    "cat": "especiales",
+    "badge": "Especiales",
     "shape": "bocadito",
     "title": "Bocaditos de espinaca y mozzarella",
     "packSize": "3kg",

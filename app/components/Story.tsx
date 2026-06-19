@@ -3,27 +3,31 @@ import { useEffect, useRef, useState } from 'react'
 
 const CHAPTERS = [
   {
-    num: '01', title: 'El rebozado',
-    lede: 'Pan rallado fresco, huevo, una pizca de orégano. La receta no cambió desde que abrimos la planta en Camet.',
-    items: ['Pan rallado del día', 'Huevos pasteurizados de proximidad', 'Sin polifosfatos, sin TACC en línea veggie'],
-    img: '/fabrica/rebozado.webp',
+    num: '01', title: 'El origen',
+    paragraphs: [
+      'La diferencia está en el origen.',
+      'Desde 2014 elaboramos alimentos ultracongelados con producción propia y una filosofía simple: hacer productos que nosotros mismos elegiríamos para nuestras familias.',
+      'Sabemos que no todas las materias primas son iguales. Tampoco todos los procesos. Por eso elegimos trabajar con ingredientes seleccionados y una elaboración consciente, porque estamos convencidos de que la calidad final depende de cada decisión que se toma mucho antes de que el producto llegue al freezer.',
+    ],
+    img: '/fabrica/Fabrica 3.webp',
   },
   {
-    num: '02', title: 'El proceso',
-    lede: 'Línea fría continua: del horno al -18°C en menos de 90 minutos. Sin cortar la cadena, sin perder textura.',
-    items: ['Trazabilidad por lote', 'Empaque atmósfera modificada', 'Auditoría SENASA mensual'],
+    num: '02', title: 'La elaboración',
+    paragraphs: [
+      'No buscamos producir más. Buscamos producir mejor.',
+      'Detrás de cada producto hay experiencia, dedicación y una manera de hacer las cosas que nos identifica desde el primer día.',
+      'Porque sabemos que la diferencia no está en una receta, sino en la forma de llevarla adelante.',
+    ],
     img: '/fabrica/proceso.webp',
   },
   {
-    num: '03', title: 'El freezer',
-    lede: 'Bolsa con zipper, no se rompe, no se pega. Sacás 4 y el resto vuelve a dormir.',
-    items: ['Listo en 12 minutos al horno', 'Sin gluten en líneas marcadas', 'Hasta 8 meses de duración'],
-    img: '/fabrica/freezer.webp',
-  },
-  {
-    num: '04', title: 'Tu mesa',
-    lede: 'El gol del jueves a la noche. Los chicos comen, vos te sentás. Mañana vemos.',
-    items: ['Sin paciencia mínima requerida', 'Combinables entre sí', 'Aprobado por hinchadas enteras'],
+    num: '03', title: 'El resultado',
+    paragraphs: [
+      'La calidad no aparece por azar. Es consecuencia de hacer las cosas bien.',
+      'Por eso, lo que llega hasta tu hogar es el resultado de cientos de decisiones tomadas con un mismo criterio: no resignar calidad.',
+      'Desde la selección de las materias primas hasta la elaboración final, cada etapa forma parte de un compromiso que mantenemos desde nuestros inicios.',
+      'Porque creemos que la confianza se construye producto a producto, todos los días.',
+    ],
     img: '/recetas/mesa.webp',
   },
 ]
@@ -67,10 +71,9 @@ export default function Story() {
               <div className="chapter__num">{ch.num}</div>
               <div className="chapter__body">
                 <h3 className="chapter__title">{ch.title}</h3>
-                <p className="chapter__lede">{ch.lede}</p>
-                <ul className="chapter__list">
-                  {ch.items.map(item => <li key={item}>{item}</li>)}
-                </ul>
+                {ch.paragraphs.map((p, pi) => (
+                  <p key={pi} className="chapter__lede">{p}</p>
+                ))}
               </div>
               <div className="chapter__art">
                 {ch.img ? (

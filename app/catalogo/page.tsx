@@ -8,7 +8,7 @@ import { PRODUCTS } from '../lib/products'
 import { SITE_URL } from '../lib/seo'
 
 const TITLE = 'Catálogo de rebozados congelados'
-const DESCRIPTION = 'Todos los rebozados congelados Formitas: pollo, pescado y bocaditos. Filtrá por categoría y mirá las presentaciones disponibles.'
+const DESCRIPTION = 'Todos los rebozados congelados Formitas: pollo, pescado y especiales. Filtrá por categoría y mirá las presentaciones disponibles.'
 
 export const metadata: Metadata = {
   title: TITLE,

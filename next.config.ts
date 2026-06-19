@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
   },
   experimental: {},
   allowedDevOrigins: ['*.ngrok-free.app'],
+  async redirects() {
+    return [
+      { source: '/catalogo/bocaditos', destination: '/catalogo/especiales', permanent: true },
+    ]
+  },
 }
 
 export default nextConfig

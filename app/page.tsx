@@ -1,5 +1,6 @@
 import ClientShell    from './components/ClientShell'
 import TopNav         from './components/TopNav'
+import Inmersiva      from './components/Inmersiva'
 import Hero           from './components/Hero'
 import Products       from './components/Products'
 import Story          from './components/Story'
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <>
       <ClientShell />
+      <Inmersiva />
       <TopNav />
       <main>
         <Hero />

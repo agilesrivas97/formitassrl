@@ -5,7 +5,7 @@ export const SITE_NAME = 'Congelados Formitas'
 export const DEFAULT_TITLE = 'Congelados Formitas — Rebozados de Mar del Plata'
 
 export const DEFAULT_DESCRIPTION =
-  'Rebozados congelados premium hechos en Mar del Plata: pollo, pescado y bocaditos. Listos en 12 minutos al horno. Distribuimos en toda la costa atlántica y AMBA.'
+  'Rebozados congelados premium hechos en Mar del Plata: pollo, pescado y especiales. Listos en 12 minutos al horno. Distribuimos en toda la costa atlántica y AMBA.'
 
 export const DEFAULT_OG_IMAGE = {
   url: '/platos/plato-3.webp',
@@ -49,11 +49,11 @@ export const CATEGORIES = {
     description:
       'Filets y medallones de merluza rebozados, capturados en el Atlántico Sur. Congelados, listos en 12 minutos al horno.',
   },
-  bocaditos: {
-    label: 'Bocaditos',
-    title: 'Bocaditos congelados: rabas, langostinos y barritas',
+  especiales: {
+    label: 'Especiales',
+    title: 'Especiales congelados: rabas, langostinos y barritas',
     description:
-      'Bocaditos congelados Formitas: rabas de calamar, langostinos y barritas de muzzarella rebozados. Ideales para compartir.',
+      'Especiales congelados Formitas: rabas de calamar, langostinos y barritas de muzzarella rebozados. Ideales para compartir.',
   },
 } as const
 
