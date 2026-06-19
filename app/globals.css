@@ -484,6 +484,13 @@ html.intro-seen .inmersiva {
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
+}
+
+/* Recién se vuelven clickeables cuando el wrapper está visible — si no, el área
+   (que crece con la animación del anillo) tapa botones de abajo como el CTA
+   aunque esté en opacity:0. */
+.inmersiva__hotspots[data-visible="true"] .hotspot {
   pointer-events: auto;
 }
 
@@ -514,6 +521,7 @@ html.intro-seen .inmersiva {
 
 .hotspot__dot {
   display: block;
+  flex-shrink: 0;
   width: 8px;
   height: 8px;
   border-radius: 50%;
