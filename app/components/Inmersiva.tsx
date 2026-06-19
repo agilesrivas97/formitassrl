@@ -29,7 +29,7 @@ export default function Inmersiva() {
 
   useEffect(() => {
     let alreadySeen = false
-    try { alreadySeen = !!sessionStorage.getItem(INTRO_KEY) } catch {}
+    try { alreadySeen = !!sessionStorage.getItem(INTRO_KEY) } catch { }
     if (alreadySeen) {
       setDismissed(true)
       return
@@ -64,17 +64,17 @@ export default function Inmersiva() {
   const handleEnded = () => setIsOpen(true)
 
   const handleDismiss = () => {
-    try { sessionStorage.setItem(INTRO_KEY, '1') } catch {}
+    try { sessionStorage.setItem(INTRO_KEY, '1') } catch { }
     document.body.style.overflow = ''
     setDismissed(true)
   }
 
   const handleSkip = () => {
-    try { sessionStorage.setItem(INTRO_KEY, '1') } catch {}
+    try { sessionStorage.setItem(INTRO_KEY, '1') } catch { }
     setCloseStage('closing')
-    setTimeout(() => setCloseStage('shut'), 480)
-    setTimeout(() => setCloseStage('opening'), 1080)
-    setTimeout(() => { document.body.style.overflow = ''; setDismissed(true) }, 1580)
+    setTimeout(() => setCloseStage('shut'), 550)
+    setTimeout(() => setCloseStage('opening'), 1650)
+    setTimeout(() => { document.body.style.overflow = ''; setDismissed(true) }, 2200)
   }
 
   if (dismissed) return null
@@ -120,7 +120,8 @@ export default function Inmersiva() {
                 aria-label={shelf.eyebrow}
                 onClick={() => setActiveId(activeId === i ? null : i)}
               >
-                <span className="hotspot__dot" aria-hidden="true" />
+                <span className="hotspot__ring" aria-hidden="true" />
+                <div className="hotspot__dot" aria-hidden="true" />
               </button>
             ))}
 
@@ -154,13 +155,9 @@ export default function Inmersiva() {
         </div>
       )}
 
-      {closeStage !== 'idle' && (
-        <div className={`inmersiva__curtain${shut ? ' is-shut' : ''}${closeStage === 'shut' ? ' show-logo' : ''}`}>
-          <span className="inmersiva__curtain-half inmersiva__curtain-half--top" aria-hidden="true" />
-          <span className="inmersiva__curtain-half inmersiva__curtain-half--bottom" aria-hidden="true" />
-          <img className="inmersiva__curtain-logo" src="/logos/rebozaditos.png" alt="" aria-hidden="true" />
-        </div>
-      )}
+      <div className={`inmersiva__curtain${shut ? ' is-shut' : ''}${closeStage === 'shut' ? ' show-logo' : ''}`}>
+        <img className="inmersiva__curtain-logo" src="/logos/rebozaditos.png" alt="" aria-hidden="true" />
+      </div>
     </section>
   )
 }
