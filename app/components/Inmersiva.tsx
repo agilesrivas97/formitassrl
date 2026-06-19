@@ -76,7 +76,7 @@ export default function Inmersiva() {
 
   return (
     <section className={`inmersiva${leaving ? ' is-leaving' : ''}`} aria-label="Abrí tu heladera Formitas">
-      <div className="inmersiva__frame">
+      <div className="inmersiva__frame" data-card-open={active ? 'true' : undefined}>
         <video
           ref={videoRef}
           className="inmersiva__video"
