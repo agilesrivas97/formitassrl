@@ -194,7 +194,16 @@ html.intro-seen .inmersiva { display: none; }
   display: flex; align-items: center; justify-content: center;
 }
 .hotspot.is-active { z-index: 10; }
-.hotspot::before { content: ''; width: 14px; height: 14px; border-radius: 50%; background: var(--cream); box-shadow: 0 0 0 2px rgba(10,60,130,.6); animation: heroPulse 1.8s var(--ease-out) infinite; }
+.hotspot::before {
+  content: ''; width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(255,255,255,.25); border: 1.5px solid rgba(255,255,255,.85);
+  box-shadow: 0 0 0 2px rgba(10,60,130,.5);
+}
+.hotspot__dot {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 7px; height: 7px; border-radius: 50%; background: var(--cream);
+  animation: heroPulse 1.8s var(--ease-out) infinite;
+}
 .hotspot__ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid var(--cream); animation: hotspotRing 2.2s var(--ease-out) infinite; }
 @keyframes hotspotRing { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(2.2); opacity: 0; } }
 
@@ -232,10 +241,10 @@ html.intro-seen .inmersiva { display: none; }
 .hotspot__glass img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block; }
 
 @media (max-width: 768px) {
-  /* Ajusta el marco al tamaño real del video (en vez de cubrir 100vw/100dvh) para
-     que en pantallas angostas y altas no se recorte tanto: se ve el frame completo,
-     "alejado", con la franja oscura de .inmersiva rellenando los bordes. */
-  .inmersiva__frame { width: min(100vw, calc(100dvh * 16 / 9)); height: min(100dvh, calc(100vw * 9 / 16)); }
+  /* .inmersiva sigue ocupando toda la pantalla (100vw/100dvh, sin scroll), pero el
+     marco del video se achica un poco y queda centrado con margen a los 4 lados —
+     así se ve "alejado" (el frame completo, sin recortar) en vez de pegado a los bordes. */
+  .inmersiva__frame { width: min(88vw, calc(88dvh * 16 / 9)); height: min(88dvh, calc(88vw * 9 / 16)); border-radius: 22px; overflow: hidden; }
 
   .inmersiva__cta-icon { width: 52px; height: 52px; }
   .inmersiva__skip { font-size: .65rem; padding: .5rem .9rem; }

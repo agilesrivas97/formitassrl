@@ -111,6 +111,7 @@ export default function Inmersiva() {
               onClick={() => setActiveId(activeId === i ? null : i)}
             >
               <span className="hotspot__ring" aria-hidden="true" />
+              <span className="hotspot__dot" aria-hidden="true" />
             </button>
           ))}
 
