@@ -14,9 +14,9 @@ type Shelf = {
 }
 
 const SHELVES: Shelf[] = [
-  { x: 50, y: 18, dir: 'down', eyebrow: 'Quiénes somos', title: 'Desde 2014 elaborando calidad', href: '/#historia', image: '/platos/plato-3.webp' },
-  { x: 50, y: 50, dir: 'down', eyebrow: 'Productos', title: 'Conocé nuestro catálogo de productos', href: '/catalogo', image: '/platos/plato-1.webp' },
-  { x: 50, y: 84, dir: 'up', eyebrow: 'Quiero ser distribuidor', title: 'Comercializá nuestros productos', href: '/#distribuidores', image: '/platos/plato-4.webp' },
+  { x: 50, y: 23, dir: 'down', eyebrow: 'Quiénes somos', title: 'Desde 2014 elaborando calidad', href: '/#historia', image: '/platos/plato-3.webp' },
+  { x: 50, y: 34, dir: 'down', eyebrow: 'Productos', title: 'Conocé nuestro catálogo de productos', href: '/catalogo', image: '/platos/plato-1.webp' },
+  { x: 50, y: 77, dir: 'up', eyebrow: 'Quiero ser distribuidor', title: 'Comercializá nuestros productos', href: '/#distribuidores', image: '/platos/plato-4.webp' },
 ]
 
 export default function Inmersiva() {
@@ -87,17 +87,21 @@ export default function Inmersiva() {
     <section className="inmersiva" aria-label="Abrí tu heladera Formitas">
       {!contentHidden && (
         <div className="inmersiva__frame" data-card-open={active ? 'true' : undefined}>
-          <video
-            ref={videoRef}
-            className="inmersiva__video"
-            muted
-            playsInline
-            preload="metadata"
-            poster="/video/heladera-open-poster.webp"
-            onEnded={handleEnded}
-          >
-            <source src="/video/heladera-open.mp4" type="video/mp4" />
-          </video>
+          {isOpen ? (
+            <img className="inmersiva__video" src="/video/end_freezer.png" alt="" />
+          ) : (
+            <video
+              ref={videoRef}
+              className="inmersiva__video"
+              muted
+              playsInline
+              preload="metadata"
+              poster="/video/init_freezer.png"
+              onEnded={handleEnded}
+            >
+              <source src="/video/escena_init.mp4" type="video/mp4" />
+            </video>
+          )}
 
           {!started && (
             <button className="inmersiva__cta" onClick={handleOpen}>
