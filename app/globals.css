@@ -343,6 +343,15 @@ html.intro-seen .inmersiva {
   background: #0c1a30;
 }
 
+.inmersiva__end-img {
+  opacity: 0;
+  transition: opacity .35s var(--ease-out);
+}
+
+.inmersiva__end-img[data-visible="true"] {
+  opacity: 1;
+}
+
 .inmersiva__cta {
   position: absolute;
   inset: 0;

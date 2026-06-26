@@ -87,21 +87,21 @@ export default function Inmersiva() {
     <section className="inmersiva" aria-label="Abrí tu heladera Formitas">
       {!contentHidden && (
         <div className="inmersiva__frame" data-card-open={active ? 'true' : undefined}>
-          {isOpen ? (
-            <img className="inmersiva__video" src="/video/end_freezer.png" alt="" />
-          ) : (
-            <video
-              ref={videoRef}
-              className="inmersiva__video"
-              muted
-              playsInline
-              preload="metadata"
-              poster="/video/init_freezer.png"
-              onEnded={handleEnded}
-            >
-              <source src="/video/escena_init.mp4" type="video/mp4" />
-            </video>
-          )}
+          <video
+            ref={videoRef}
+            className="inmersiva__video"
+            muted
+            playsInline
+            preload="metadata"
+            poster="/video/init_freezer.png"
+            onEnded={handleEnded}
+          >
+            <source src="/video/escena_init.mp4" type="video/mp4" />
+          </video>
+          {/* Montada desde el arranque (oculta) para que el navegador la precargue
+              mientras corre el video — así al terminar hace un crossfade en vez de
+              un parpadeo esperando a que la imagen recién empiece a bajar. */}
+          <img className="inmersiva__video inmersiva__end-img" data-visible={isOpen} src="/video/end_freezer.png" alt="" />
 
           {!started && (
             <button className="inmersiva__cta" onClick={handleOpen}>
