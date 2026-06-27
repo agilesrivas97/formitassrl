@@ -11,12 +11,14 @@ type Shelf = {
   title: string
   href: string
   image: string
+  tint: string
 }
 
+// Mismos colores que CAT_TINTS (app/lib/products.ts) usados en la sección de catálogo.
 const SHELVES: Shelf[] = [
-  { x: 50, y: 23, dir: 'down', eyebrow: 'Quiénes somos', title: 'Desde 2014 elaborando calidad', href: '/#historia', image: '/platos/plato-3.webp' },
-  { x: 50, y: 34, dir: 'down', eyebrow: 'Productos', title: 'Conocé nuestro catálogo de productos', href: '/catalogo', image: '/platos/plato-1.webp' },
-  { x: 50, y: 77, dir: 'up', eyebrow: 'Quiero ser distribuidor', title: 'Comercializá nuestros productos', href: '/#distribuidores', image: '/platos/plato-4.webp' },
+  { x: 50, y: 23, dir: 'down', eyebrow: 'Quiénes somos', title: 'Desde 2014 elaborando calidad', href: '/#historia', image: '/platos/plato-3.webp', tint: '#E8440A' },
+  { x: 50, y: 47, dir: 'down', eyebrow: 'Productos', title: 'Conocé nuestro catálogo de productos', href: '/catalogo', image: '/platos/plato-1.webp', tint: '#0B5C8F' },
+  { x: 50, y: 77, dir: 'up', eyebrow: 'Quiero ser distribuidor', title: 'Comercializá nuestros productos', href: '/#distribuidores', image: '/platos/plato-4.webp', tint: '#F5A623' },
 ]
 
 export default function Inmersiva() {
@@ -102,30 +104,41 @@ export default function Inmersiva() {
               mientras corre el video — así al terminar hace un crossfade en vez de
               un parpadeo esperando a que la imagen recién empiece a bajar. */}
           <img className="inmersiva__video inmersiva__end-img" data-visible={isOpen} src="/video/end_freezer.png" alt="" />
+          <div className="inmersiva__scrim" aria-hidden="true" />
 
           {!started && (
-            <button className="inmersiva__cta" onClick={handleOpen}>
-              <span className="inmersiva__cta-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="22" height="22">
-                  <path d="M8 5v14l11-7z" fill="currentColor" />
-                </svg>
-              </span>
-              Tocá para abrir tu heladera
-            </button>
+            <>
+              <img className="inmersiva__brand" src="/logos/rebozaditos.png" alt="Rebozaditos Pop" />
+              <button className="inmersiva__cta" onClick={handleOpen}>
+                <p className="inmersiva__tagline">
+                  Cada heladera cuenta una historia.
+                  <span className="inmersiva__tagline-sub">Nosotros queremos estar en la tuya.</span>
+                </p>
+                <span className="inmersiva__cta-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="22" height="22">
+                    <path d="M8 5v14l11-7z" fill="currentColor" />
+                  </svg>
+                </span>
+                Conocé la nuestra
+              </button>
+            </>
           )}
 
           <div className="inmersiva__hotspots" data-visible={isOpen}>
+            <p className="inmersiva__story">Nosotros te contamos la nuestra en cada estante y queremos acompañarte.</p>
             {SHELVES.map((shelf, i) => (
               <button
                 key={shelf.eyebrow}
                 className={`hotspot${activeId === i ? ' is-active' : ''}`}
-                style={{ left: `${shelf.x}%`, top: `${shelf.y}%` }}
+                style={{ left: `${shelf.x}%`, top: `${shelf.y}%`, ['--tint' as string]: shelf.tint }}
+                data-label-dir={shelf.dir}
                 aria-expanded={activeId === i}
                 aria-label={shelf.eyebrow}
                 onClick={() => setActiveId(activeId === i ? null : i)}
               >
                 <span className="hotspot__ring" aria-hidden="true" />
                 <div className="hotspot__dot" aria-hidden="true" />
+                <span className="hotspot__label" aria-hidden="true">{shelf.eyebrow}</span>
               </button>
             ))}
 

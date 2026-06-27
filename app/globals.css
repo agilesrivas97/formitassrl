@@ -352,6 +352,27 @@ html.intro-seen .inmersiva {
   opacity: 1;
 }
 
+.inmersiva__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0, 8, 22, .55) 0%, rgba(0, 8, 22, .1) 22%, rgba(0, 8, 22, 0) 45%, rgba(0, 8, 22, .15) 70%, rgba(0, 8, 22, .55) 100%);
+}
+
+.inmersiva__brand {
+  position: absolute;
+  top: clamp(2.2rem, 7vh, 3.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  width: clamp(140px, 22vw, 220px);
+  height: auto;
+  filter: drop-shadow(0 6px 16px rgba(0, 10, 30, .45));
+  pointer-events: none;
+}
+
 .inmersiva__cta {
   position: absolute;
   inset: 0;
@@ -377,6 +398,29 @@ html.intro-seen .inmersiva {
 
 .inmersiva__cta:hover {
   background: linear-gradient(180deg, rgba(0, 10, 30, .1), rgba(0, 10, 30, .65));
+}
+
+.inmersiva__tagline {
+  margin: 0 0 .2rem;
+  max-width: min(80vw, 480px);
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.3rem, 3.6vw, 2.1rem);
+  line-height: 1.15;
+  text-transform: none;
+  letter-spacing: 0;
+  text-shadow: 0 4px 18px rgba(0, 10, 30, .55);
+}
+
+.inmersiva__tagline-sub {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(.95rem, 2.2vw, 1.25rem);
+  color: var(--orange);
+  text-shadow: 0 4px 18px rgba(0, 10, 30, .55);
 }
 
 .inmersiva__cta-icon {
@@ -418,7 +462,8 @@ html.intro-seen .inmersiva {
   cursor: pointer;
   padding: .55rem 1rem;
   border-radius: 100px;
-  background: rgba(245, 240, 232, .12);
+  background: rgba(8, 16, 32, .45);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .25);
   backdrop-filter: blur(10px);
   color: var(--cream);
   font-family: var(--font-body);
@@ -430,7 +475,7 @@ html.intro-seen .inmersiva {
 }
 
 .inmersiva__skip:hover {
-  background: rgba(245, 240, 232, .22);
+  background: rgba(8, 16, 32, .65);
   transform: translateY(-2px);
 }
 
@@ -488,6 +533,28 @@ html.intro-seen .inmersiva {
   opacity: 0;
   transition: opacity .4s var(--ease-out);
   pointer-events: none;
+}
+
+.inmersiva__story {
+  position: absolute;
+  top: clamp(3.6rem, 9vh, 4.8rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  margin: 0;
+  max-width: min(78vw, 460px);
+  padding: .75rem 1.3rem;
+  border-radius: 16px;
+  background: rgba(6, 12, 26, .55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(.78rem, 1.7vw, .92rem);
+  line-height: 1.4;
+  letter-spacing: .01em;
+  text-align: center;
 }
 
 .inmersiva__hotspots[data-visible="true"] {
@@ -552,6 +619,39 @@ html.intro-seen .inmersiva {
   background: #fff;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, .35);
   animation: heroPulse 1.8s var(--ease-out) infinite;
+}
+
+.hotspot__label {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: .6rem;
+  padding: .45rem 1rem;
+  border-radius: 100px;
+  background: var(--tint, var(--orange));
+  box-shadow: 0 6px 16px color-mix(in oklab, var(--tint, var(--orange)) 55%, transparent);
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity .2s var(--ease-out);
+}
+
+.hotspot.is-active .hotspot__label {
+  opacity: 0;
+}
+
+.hotspot[data-label-dir="up"] .hotspot__label {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: .6rem;
 }
 
 /* Tarjeta única, hermana de los puntos (no anidada dentro de .hotspot): un ancestro
@@ -678,6 +778,12 @@ html.intro-seen .inmersiva {
     padding: .5rem .9rem;
   }
 
+  .inmersiva__story {
+    font-size: .68rem;
+    padding: .6rem 1rem;
+    max-width: 84vw;
+  }
+
   /* En celular solo existe "Saltar" — "Entrar al sitio" nunca se muestra. */
   .inmersiva__enter {
     display: none;
@@ -762,6 +868,13 @@ html.intro-seen .inmersiva {
   gap: 1.6rem;
   max-width: min(46vw, 620px);
   padding-left: var(--pad-x);
+}
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
 }
 
 .hero__eyebrow {

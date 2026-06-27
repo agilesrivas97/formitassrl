@@ -22,9 +22,14 @@ export default function Hero() {
           <em>Solucionaste</em> la cena.
         </h1>
 
-        <a href="#productos" className="btn btn--hero" data-cursor="grow">
-          Ver productos <span aria-hidden="true">→</span>
-        </a>
+        <div className="hero__ctas">
+          <a href="#productos" className="btn btn--hero" data-cursor="grow">
+            Ver productos <span aria-hidden="true">→</span>
+          </a>
+          <a href="#distribuidores" className="btn btn--ghost" data-cursor="grow">
+            Quiero ser distribuidor <span aria-hidden="true">→</span>
+          </a>
+        </div>
       </div>
 
       <div className="hero__stage">
