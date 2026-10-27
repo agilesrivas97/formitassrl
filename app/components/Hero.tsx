@@ -1,60 +1,49 @@
-import Image from 'next/image'
-
-const PROD_IMAGES = [
-  { src: '/platos/plato-3.webp', alt: 'Medallones rebozados servidos en plato', cls: 'hero__prod--a' },
-  { src: '/platos/plato-2.webp', alt: 'Filet de merluza rebozado servido en plato', cls: 'hero__prod--b' },
-  { src: '/platos/plato-1.webp', alt: 'Barritas de muzzarella servidas en plato', cls: 'hero__prod--c' },
-  { src: '/platos/plato-4.webp', alt: 'Rabas de calamar servidas en plato', cls: 'hero__prod--d' },
-]
-
 export default function Hero() {
   return (
     <section className="hero" aria-label="Bienvenida" id="top">
-      <div className="hero__dots" />
+      <div className="hero__half hero__half--text">
+        <div className="hero__dots" />
 
-      <div className="hero__copy">
-        <div className="hero__eyebrow">
-          <span className="hero__eyebrow-dot" />
-          Mar del Plata · Desde 2014
-        </div>
+        <div className="hero__copy">
+          <div className="hero__eyebrow">
+            <span className="hero__eyebrow-dot" />
+            Mar del Plata · Desde 2014
+          </div>
 
-        <h1 className="hero__final-title">
-          <em>Solucionaste</em> la cena.
-        </h1>
+          <h1 className="hero__final-title">
+            <em>Solucionaste</em> la cena.
+          </h1>
 
-        <div className="hero__ctas">
-          <a href="#productos" className="btn btn--hero" data-cursor="grow">
-            Ver productos <span aria-hidden="true">→</span>
-          </a>
-          <a href="#distribuidores" className="btn btn--ghost" data-cursor="grow">
-            Quiero ser distribuidor <span aria-hidden="true">→</span>
-          </a>
+          <p className="hero__desc">
+            Rebozados artesanales, sin conservantes, con pescado del Atlántico Sur — hechos en Mar
+            del Plata desde 2014. Del freezer a la mesa en minutos, con el sabor de la cocina de siempre.
+          </p>
+
+          <div className="hero__ctas">
+            <a href="#productos" className="btn btn--hero" data-cursor="grow">
+              Ver productos <span aria-hidden="true">→</span>
+            </a>
+            <a href="#distribuidores" className="btn btn--ghost" data-cursor="grow">
+              Quiero ser distribuidor <span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
 
-      <div className="hero__stage">
-        <div className="hero__sparks" aria-hidden="true">
-          {[
-            { x: '8%', y: '14%', d: '0s', t: '★' },
-            { x: '88%', y: '18%', d: '.5s', t: '✦' },
-            { x: '14%', y: '78%', d: '1s', t: '✦' },
-            { x: '82%', y: '74%', d: '.3s', t: '★' },
-          ].map((s, i) => (
-            <span key={i} style={{ ['--x' as string]: s.x, ['--y' as string]: s.y, ['--d' as string]: s.d }}>{s.t}</span>
-          ))}
-        </div>
-
-        <div className="hero__mascot">
-          <img src="/mascot/06-point.webp" alt="Mascota Formitas señalando los productos" />
-        </div>
-
-        <div className="hero__products">
-          {PROD_IMAGES.map(p => (
-            <div key={p.src} className={`hero__prod ${p.cls}`}>
-              <Image src={p.src} alt={p.alt} width={280} height={280} />
-            </div>
-          ))}
-        </div>
+      <div className="hero__half hero__half--media">
+        <video
+          className="hero__media-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/camion-poster.jpg"
+        >
+          <source src="/camion.mp4" type="video/mp4" />
+        </video>
+        <div className="hero__nav-scrim" aria-hidden="true" />
+        <div className="hero__media-scrim" aria-hidden="true" />
       </div>
 
       <div className="hero__marquee" aria-hidden="true">

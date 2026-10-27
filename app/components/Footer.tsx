@@ -32,8 +32,9 @@ export default function Footer() {
           <div>
             <h4>Contacto</h4>
             <a href="tel:+5492236045371">223-6045371</a>
+            <a href="tel:+542234805751">Tel. 0223-4805751</a>
             <a href="mailto:info@congeladosformitas.com.ar">info@congeladosformitas.com.ar</a>
-            <span>Camet 3500, MDP</span>
+            <span>Ortiz de Zárate 3736, Mar del Plata (CP 7600)</span>
             <span>Lun a Vie, 8 a 17h</span>
           </div>
         </nav>

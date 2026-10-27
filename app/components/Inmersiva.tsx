@@ -12,13 +12,18 @@ type Shelf = {
   href: string
   image: string
   tint: string
+  anim: 'a' | 'b' | 'c'
 }
+
+// Pedido del cliente: dejamos el sistema viejo de puntos clickeables armado
+// pero apagado, por si se quiere volver atrás. No borrar.
+const SHOW_LEGACY_HOTSPOTS = false
 
 // Mismos colores que CAT_TINTS (app/lib/products.ts) usados en la sección de catálogo.
 const SHELVES: Shelf[] = [
-  { x: 50, y: 23, dir: 'down', eyebrow: 'Quiénes somos', title: 'Desde 2014 elaborando calidad', href: '/#historia', image: '/platos/plato-3.webp', tint: '#E8440A' },
-  { x: 50, y: 47, dir: 'down', eyebrow: 'Productos', title: 'Conocé nuestro catálogo de productos', href: '/catalogo', image: '/platos/plato-1.webp', tint: '#0B5C8F' },
-  { x: 50, y: 77, dir: 'up', eyebrow: 'Quiero ser distribuidor', title: 'Comercializá nuestros productos', href: '/#distribuidores', image: '/platos/plato-4.webp', tint: '#F5A623' },
+  { x: 50, y: 23, dir: 'down', eyebrow: 'Quiénes somos', title: 'Desde 2014 elaborando calidad', href: '/#historia', image: '/cunita.png', tint: '#E8440A', anim: 'a' },
+  { x: 50, y: 47, dir: 'down', eyebrow: 'Productos', title: 'Conocé nuestro catálogo de productos', href: '/catalogo', image: '/platos/plato-1.webp', tint: '#0B5C8F', anim: 'b' },
+  { x: 50, y: 77, dir: 'up', eyebrow: 'Quiero ser distribuidor', title: 'Comercializá nuestros productos', href: '/#distribuidores', image: '/package-card.png', tint: '#F5A623', anim: 'c' },
 ]
 
 export default function Inmersiva() {
@@ -124,41 +129,67 @@ export default function Inmersiva() {
             </>
           )}
 
-          <div className="inmersiva__hotspots" data-visible={isOpen}>
-            <p className="inmersiva__story">Nosotros te contamos la nuestra en cada estante y queremos acompañarte.</p>
-            {SHELVES.map((shelf, i) => (
-              <button
-                key={shelf.eyebrow}
-                className={`hotspot${activeId === i ? ' is-active' : ''}`}
-                style={{ left: `${shelf.x}%`, top: `${shelf.y}%`, ['--tint' as string]: shelf.tint }}
-                data-label-dir={shelf.dir}
-                aria-expanded={activeId === i}
-                aria-label={shelf.eyebrow}
-                onClick={() => setActiveId(activeId === i ? null : i)}
-              >
-                <span className="hotspot__ring" aria-hidden="true" />
-                <div className="hotspot__dot" aria-hidden="true" />
-                <span className="hotspot__label" aria-hidden="true">{shelf.eyebrow}</span>
-              </button>
-            ))}
+          {SHOW_LEGACY_HOTSPOTS && (
+            <div className="inmersiva__hotspots" data-visible={isOpen}>
+              <p className="inmersiva__story">Nosotros te contamos la nuestra en cada estante y queremos acompañarte.</p>
+              {SHELVES.map((shelf, i) => (
+                <button
+                  key={shelf.eyebrow}
+                  className={`hotspot${activeId === i ? ' is-active' : ''}`}
+                  style={{ left: `${shelf.x}%`, top: `${shelf.y}%`, ['--tint' as string]: shelf.tint }}
+                  data-label-dir={shelf.dir}
+                  aria-expanded={activeId === i}
+                  aria-label={shelf.eyebrow}
+                  onClick={() => setActiveId(activeId === i ? null : i)}
+                >
+                  <span className="hotspot__ring" aria-hidden="true" />
+                  <div className="hotspot__dot" aria-hidden="true" />
+                  <span className="hotspot__label" aria-hidden="true">{shelf.eyebrow}</span>
+                </button>
+              ))}
 
-            {active && (
-              <div
-                className={`hotspot__card hotspot__card--${active.dir}`}
-                style={{ ['--hx' as string]: `${active.x}%`, ['--hy' as string]: `${active.y}%` }}
-                role="dialog"
-              >
-                <div className="hotspot__glass" aria-hidden="true">
-                  <img src={active.image} alt="" />
+              {active && (
+                <div
+                  className={`hotspot__card hotspot__card--${active.dir}`}
+                  style={{ ['--hx' as string]: `${active.x}%`, ['--hy' as string]: `${active.y}%` }}
+                  role="dialog"
+                >
+                  <div className="hotspot__glass" aria-hidden="true">
+                    <img src={active.image} alt="" />
+                  </div>
+                  <div className="hotspot__eyebrow">{active.eyebrow}</div>
+                  <p className="hotspot__title">{active.title}</p>
+                  <a href={active.href} className="hotspot__link" data-cursor="grow" onClick={handleDismiss}>
+                    Ver más <span aria-hidden="true">→</span>
+                  </a>
                 </div>
-                <div className="hotspot__eyebrow">{active.eyebrow}</div>
-                <p className="hotspot__title">{active.title}</p>
-                <a href={active.href} className="hotspot__link" data-cursor="grow" onClick={handleDismiss}>
-                  Ver más <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            )}
+              )}
+            </div>
+          )}
+
+          {isOpen && (
+          <div className="story-stack" data-visible="true">
+            {SHELVES.map((shelf, i) => (
+              <a
+                key={shelf.eyebrow}
+                href={shelf.href}
+                data-cursor="grow"
+                onClick={handleDismiss}
+                className={`story-card story-card--${shelf.anim}`}
+                style={{ animationDelay: `${i * 0.9 + 0.3}s`, ['--tint' as string]: shelf.tint }}
+              >
+                <div className="story-card__head">
+                  <span className="story-card__eyebrow">{shelf.eyebrow}</span>
+                  <p className="story-card__title">{shelf.title}</p>
+                </div>
+                <div className="story-card__media" aria-hidden="true">
+                  <img src={shelf.image} alt="" />
+                </div>
+                <span className="story-card__cta">Ver más</span>
+              </a>
+            ))}
           </div>
+          )}
 
           {isOpen && (
             <button className="inmersiva__enter" onClick={handleSkip} data-cursor="grow">

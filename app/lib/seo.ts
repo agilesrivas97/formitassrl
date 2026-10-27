@@ -23,7 +23,7 @@ export const BUSINESS = {
   foundingDate: '2014',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Camet 3500',
+    streetAddress: 'Ortiz de Zárate 3736',
     addressLocality: 'Mar del Plata',
     addressRegion: 'Buenos Aires',
     postalCode: 'B7600',
