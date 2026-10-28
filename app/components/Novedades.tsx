@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
+import { whatsappHref } from '../lib/contact'
 
 type Slide = {
   id: string
@@ -11,6 +12,7 @@ type Slide = {
   subtitle: string
   desc: string
   cta: string
+  ctaHref?: string
   chips?: string[]
   image: { src: string; alt: string }
   background?: string
@@ -35,10 +37,11 @@ const SLIDES: Slide[] = [
     tag: 'Merch',
     theme: 'cream',
     title: <>Merch <span className="t-orange">Pop</span></>,
-    subtitle: 'El universo Pop, más allá de la mesa.',
-    desc: 'Artículos de la marca, ediciones especiales y próximos lanzamientos.',
-    cta: 'Conocé el merch',
-    chips: ['A definir', 'Próximamente'],
+    subtitle: 'Regalitos de la casa para nuestros clientes.',
+    desc: 'Tenemos remeras, gorras y folletería de Rebozaditos Pop. No se venden: son detalles que a veces regalamos a nuestros clientes. Si querés uno, consultanos.',
+    cta: 'Consultar por merch',
+    ctaHref: whatsappHref('Hola! Quería consultar por el merch de Rebozaditos Pop (remeras, gorras, folletería).'),
+    chips: ['No se vende', 'Consultá disponibilidad'],
     image: { src: '/pop/merch.webp', alt: 'Remeras, gorra y folletería de Rebozaditos Pop' },
   },
 ]
@@ -91,12 +94,20 @@ export default function Novedades() {
                 {slide.chips.map(c => <li key={c}>{c}</li>)}
               </ul>
             )}
-            {/* Sin destino definido todavía: el botón se muestra como "Próximamente". */}
-            <span className="nov-card__cta" aria-disabled="true">
-              {slide.cta}
-              <small>Próximamente</small>
-              <Image src="/logos/logo-cara.png" alt="" width={36} height={36} />
-            </span>
+            {slide.ctaHref ? (
+              <a className="nov-card__cta" href={slide.ctaHref} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+                {slide.cta}
+                <small>WhatsApp</small>
+                <Image src="/logos/logo-cara.png" alt="" width={36} height={36} />
+              </a>
+            ) : (
+              // Sin destino definido todavía: el botón se muestra como "Próximamente".
+              <span className="nov-card__cta" aria-disabled="true">
+                {slide.cta}
+                <small>Próximamente</small>
+                <Image src="/logos/logo-cara.png" alt="" width={36} height={36} />
+              </span>
+            )}
           </div>
         </article>
 
