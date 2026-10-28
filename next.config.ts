@@ -14,7 +14,9 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ['*.ngrok-free.app'],
   async redirects() {
     return [
-      { source: '/catalogo/bocaditos', destination: '/catalogo/especiales', permanent: true },
+      { source: '/catalogo/bocaditos', destination: '/catalogo/vegetales', permanent: true },
+      // La categoría "especiales" se dividió en mariscos y vegetales/quesos.
+      { source: '/catalogo/especiales', destination: '/catalogo/mariscos', permanent: true },
     ]
   },
 }

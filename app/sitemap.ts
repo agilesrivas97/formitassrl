@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { CATEGORIES, SITE_URL } from './lib/seo'
+import { PRODUCTS, productHref } from './lib/products'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
@@ -12,6 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${SITE_URL}/distribuidores`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.95,
+    },
+    {
       url: `${SITE_URL}/catalogo`,
       lastModified: now,
       changeFrequency: 'weekly',
@@ -22,6 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: 'weekly' as const,
       priority: 0.8,
+    })),
+    ...PRODUCTS.map(prod => ({
+      url: `${SITE_URL}${productHref(prod)}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     })),
   ]
 }

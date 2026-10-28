@@ -2,26 +2,26 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 const LINKS = [
   { href: '/#productos', label: 'Productos' },
-  { href: '/#historia', label: 'Historia' },
-  { href: '/#proximamente', label: 'Próximamente' },
-  { href: '/#feed', label: 'Comunidad' },
-  { href: '/#distribuidores', label: 'Distribuidores', cta: true },
+  { href: '/#novedades', label: 'Rebodinos' },
+  { href: '/#historia', label: 'Empresa' },
+  { href: '/#distribucion', label: 'Distribución' },
+  { href: '/#contacto', label: 'Contacto' },
 ]
+
+const CTA = { href: '/distribuidores', label: 'Quiero distribuir' }
 
 export default function TopNav() {
   const nav = useRef<HTMLElement>(null)
   const [open, setOpen] = useState(false)
-  const pathname = usePathname()
-  const solid = pathname !== '/'
 
   useEffect(() => {
     const onScroll = () => {
-      nav.current?.classList.toggle('is-stuck', window.scrollY > 60)
+      nav.current?.classList.toggle('is-stuck', window.scrollY > 40)
     }
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -32,48 +32,38 @@ export default function TopNav() {
   }, [open])
 
   return (
-    <>
-      <header ref={nav} className={`topnav${solid ? ' topnav--solid' : ''}${open ? ' is-open' : ''}`}>
-        <Link href="/" className="topnav__brand" onClick={() => setOpen(false)}>
-          <span className="topnav__mark" aria-hidden="true">
-            <Image src="/logos/logo-cara.png" alt="" width={40} height={40} />
-          </span>
-          <span className="topnav__word">
-            Formitas<small style={{display:'block',fontWeight:500,fontSize:'.6em',opacity:.6,letterSpacing:'.06em'}}>Mar del Plata</small>
-          </span>
+    <header ref={nav} className={`topnav${open ? ' is-open' : ''}`}>
+      <div className="topnav__bar">
+        <Link href="/" className="topnav__brand" aria-label="Rebozaditos Pop — inicio" onClick={() => setOpen(false)}>
+          <Image src="/logos/rebozaditos.png" alt="Rebozaditos Pop" width={791} height={395} preload />
         </Link>
 
-        <nav className="topnav__links">
+        <nav className="topnav__links" aria-label="Principal">
           {LINKS.map(l => (
-            <Link key={l.href} href={l.href} className={l.cta ? 'topnav__cta' : undefined} data-cursor="grow">
-              {l.label}
-            </Link>
+            <Link key={l.href} href={l.href} data-cursor="grow">{l.label}</Link>
           ))}
         </nav>
+
+        <Link href={CTA.href} className="pop-btn pop-btn--navy topnav__cta" data-cursor="grow" data-track="nav_quiero_distribuir">
+          {CTA.label}
+        </Link>
 
         <button
           className="topnav__burger"
           aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
           aria-expanded={open}
+          aria-controls="topnav-mobile"
           onClick={() => setOpen(o => !o)}
         >
           <span /><span /><span />
         </button>
-      </header>
+      </div>
 
-      <nav className={`topnav__mobile${open ? ' is-open' : ''}`}>
-        {LINKS.map(l => (
-          <Link
-            key={l.href}
-            href={l.href}
-            className={l.cta ? 'topnav__cta' : undefined}
-            data-cursor="grow"
-            onClick={() => setOpen(false)}
-          >
-            {l.label}
-          </Link>
+      <nav id="topnav-mobile" className="topnav__mobile" aria-label="Principal (móvil)">
+        {[...LINKS, CTA].map(l => (
+          <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>
         ))}
       </nav>
-    </>
+    </header>
   )
 }

@@ -18,6 +18,8 @@ export const metadata: Metadata = {
     'nuggets de pollo congelados',
     'medallones de merluza congelados',
     'formitas',
+    'rebozaditos pop',
+    'rebodinos',
   ],
   alternates: {
     canonical: '/',
@@ -61,7 +63,7 @@ const organizationJsonLd = {
   sameAs: BUSINESS.sameAs,
   areaServed: {
     '@type': 'AdministrativeArea',
-    name: 'Costa Atlántica y AMBA, Argentina',
+    name: 'Argentina',
   },
 }
 
@@ -71,16 +73,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es-AR" suppressHydrationWarning>
       <head>
+        {/* Antes de pintar: si ya vio la intro esta semana, html.intro-seen oculta el loader */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem('formitas-intro-seen')){document.documentElement.classList.add('intro-seen')}}catch(e){}`,
+            __html: `try{var t=+localStorage.getItem('pop-intro-seen');if(t&&Date.now()-t<6048e5)document.documentElement.classList.add('intro-seen')}catch(e){}`,
           }}
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Anton&family=Barlow:wght@500;600;700;800;900&display=swap"
         />
 
         <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />

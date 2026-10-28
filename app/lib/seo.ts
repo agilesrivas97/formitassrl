@@ -1,17 +1,17 @@
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://congeladosformitas.com.ar').replace(/\/$/, '')
 
-export const SITE_NAME = 'Congelados Formitas'
+export const SITE_NAME = 'Rebozaditos Pop'
 
-export const DEFAULT_TITLE = 'Congelados Formitas — Rebozados de Mar del Plata'
+export const DEFAULT_TITLE = 'Rebozaditos Pop — Fábrica de rebozados congelados en Mar del Plata'
 
 export const DEFAULT_DESCRIPTION =
-  'Rebozados congelados premium hechos en Mar del Plata: pollo, pescado y especiales. Listos en 12 minutos al horno. Distribuimos en toda la costa atlántica y AMBA.'
+  'Fábrica de rebozados congelados en Mar del Plata desde 2014: pollo, pescado, mariscos, vegetales y quesos. Buscamos distribuidores mayoristas en todo el país. Una marca de Congelados Formitas SRL.'
 
 export const DEFAULT_OG_IMAGE = {
-  url: '/platos/plato-3.webp',
-  width: 1024,
-  height: 1024,
-  alt: 'Medallones rebozados Formitas servidos en plato',
+  url: '/og-image.jpg',
+  width: 1200,
+  height: 630,
+  alt: 'Rebozaditos Pop — rebozados congelados de Mar del Plata',
 }
 
 export const BUSINESS = {
@@ -49,11 +49,17 @@ export const CATEGORIES = {
     description:
       'Filets y medallones de merluza rebozados, capturados en el Atlántico Sur. Congelados, listos en 12 minutos al horno.',
   },
-  especiales: {
-    label: 'Especiales',
-    title: 'Especiales congelados: rabas, langostinos y barritas',
+  mariscos: {
+    label: 'Mariscos',
+    title: 'Mariscos rebozados congelados: rabas y langostinos',
     description:
-      'Especiales congelados Formitas: rabas de calamar, langostinos y barritas de muzzarella rebozados. Ideales para compartir.',
+      'Rabas de calamar y langostinos rebozados congelados Rebozaditos Pop. Ideales para compartir. Hechos en Mar del Plata.',
+  },
+  vegetales: {
+    label: 'Vegetales y quesos',
+    title: 'Rebozados congelados de vegetales y quesos',
+    description:
+      'Barritas de mozzarella, bocaditos de espinaca y medallones con vegetales rebozados congelados. Hechos en Mar del Plata.',
   },
 } as const
 

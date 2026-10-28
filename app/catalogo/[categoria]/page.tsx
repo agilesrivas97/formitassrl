@@ -6,7 +6,7 @@ import CatalogFull    from '../../components/CatalogFull'
 import Footer         from '../../components/Footer'
 import WhatsAppFloat  from '../../components/WhatsAppFloat'
 import { PRODUCTS } from '../../lib/products'
-import { CATEGORIES, CategoryId, SITE_URL } from '../../lib/seo'
+import { CATEGORIES, CategoryId, DEFAULT_OG_IMAGE, SITE_URL } from '../../lib/seo'
 
 type Params = { categoria: string }
 
@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       title,
       description,
       url: `${SITE_URL}/catalogo/${categoria}`,
+      images: [DEFAULT_OG_IMAGE],
     },
     twitter: {
       title,

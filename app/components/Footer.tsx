@@ -1,50 +1,39 @@
-import Image from 'next/image'
 import Link from 'next/link'
+
+const LINKS = [
+  { href: '/catalogo', label: 'Catálogo' },
+  { href: '/#historia', label: 'Historia' },
+  { href: '/#productos', label: 'Productos' },
+  { href: '/#novedades', label: 'Rebodinos' },
+  { href: '/#novedades', label: 'Novedades' },
+  { href: '/distribuidores', label: 'Distribuidores' },
+]
 
 export default function Footer() {
   return (
     <footer className="footer">
-      <div className="footer__top">
+      <div className="footer__top pop-wrap">
         <div className="footer__brand">
-          <Image
-            src="/logos/rebozaditos.png"
-            alt="Rebozaditos Pop"
-            width={791} height={395}
-            className="footer__logo"
-          />
-          <p className="footer__tag">Rebozados de Mar del Plata. Hechos por gente que come lo que hace.</p>
+          <p className="footer__claim">Calidad, sabor y frescura para tu mesa.</p>
+          <p className="footer__name">Congelados Formitas SRL</p>
+          <p className="footer__sub">Rebozados prefritos y ultracongelados · Mar del Plata</p>
         </div>
-        <nav className="footer__cols">
-          <div>
-            <h4>Productos</h4>
-            <Link href="/catalogo/pollo">Pollo</Link>
-            <Link href="/catalogo/pescado">Pescado</Link>
-            <Link href="/catalogo/especiales">Especiales</Link>
-            <Link href="/catalogo">Catálogo completo</Link>
-          </div>
-          <div>
-            <h4>Marca</h4>
-            <Link href="/#historia">Historia</Link>
-            <Link href="/#feed">Comunidad</Link>
-            <Link href="/#distribuidores">Distribuidores</Link>
-            <a href="mailto:info@congeladosformitas.com.ar?subject=Quiero%20trabajar%20con%20Formitas">Trabajá con nosotros</a>
-          </div>
-          <div>
-            <h4>Contacto</h4>
-            <a href="tel:+5492236045371">223-6045371</a>
-            <a href="tel:+542234805751">Tel. 0223-4805751</a>
-            <a href="mailto:info@congeladosformitas.com.ar">info@congeladosformitas.com.ar</a>
-            <span>Ortiz de Zárate 3736, Mar del Plata (CP 7600)</span>
-            <span>Lun a Vie, 8 a 17h</span>
-          </div>
+
+        <p className="footer__quote">
+          Elaboramos productos para nuestras familias.
+          <span className="t-orange">Esa es la calidad que compartimos.</span>
+        </p>
+
+        <nav className="footer__links" aria-label="Pie de página">
+          {LINKS.map(l => (
+            <Link key={l.label} href={l.href}>{l.label}</Link>
+          ))}
         </nav>
       </div>
-      <div className="footer__bottom">
-        <span>© 2026 Congelados Formitas SRL · CUIT 30-71234567-8</span>
-        <span className="footer__socials">
-          <a href="https://instagram.com/rebozaditospop" target="_blank" rel="noopener noreferrer" data-cursor="grow">Instagram</a>
-          <a href="https://wa.me/5492236045371" target="_blank" rel="noopener noreferrer" data-cursor="grow">WhatsApp</a>
-        </span>
+
+      <div className="footer__bottom pop-wrap">
+        <span>© {new Date().getFullYear()} Rebozaditos Pop · Congelados Formitas SRL</span>
+        <span>Ortiz de Zárate 3736, Mar del Plata · Lun a Vie, 8 a 17 h</span>
       </div>
     </footer>
   )

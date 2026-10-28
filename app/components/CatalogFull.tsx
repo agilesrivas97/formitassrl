@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { PRODUCTS, CAT_TINTS, PILLS } from '../lib/products'
+import { PRODUCTS, PILLS } from '../lib/products'
 import ProductCard from './ProductCard'
 
 type CatalogFullProps = {
@@ -21,19 +21,15 @@ export default function CatalogFull({ id, showHead = true, initialCat = 'all' }:
     return () => document.removeEventListener('click', handler)
   }, [])
 
-  const sectionBg = activeCat === 'all'
-    ? 'var(--bg)'
-    : `color-mix(in oklab, ${CAT_TINTS[activeCat]} 10%, var(--bg))`
-
   const toggle = (pid: string) => setOpenCard(prev => prev === pid ? null : pid)
 
   return (
-    <section className="cats" id={id} aria-label="Categorías" style={{ background: sectionBg }}>
+    <section className="cats" id={id} aria-label="Categorías">
       {showHead && (
         <div className="cats__head">
-          <div className="cats__kicker">02 · Catálogo</div>
-          <h2 className="cats__title">Cada freezer, un mundo.</h2>
-          <p className="cats__lede">Tres líneas, una sola obsesión: que cuando lo abrís, sepa a recién hecho.</p>
+          <div className="cats__kicker">Catálogo · Rebozaditos Pop</div>
+          <h2 className="cats__title">Cuatro universos. <span>Muchas formas de comer rico.</span></h2>
+          <p className="cats__lede">Todas las líneas, variedades y formatos en un solo lugar.</p>
         </div>
       )}
 
