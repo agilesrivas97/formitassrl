@@ -129,6 +129,20 @@ export default function DistribuidoresPage() {
           </div>
         </section>
 
+        <section className="dpage__section" aria-labelledby="faq-title">
+          <div className="pop-wrap dpage__faq-wrap">
+            <p className="pop-eyebrow pop-eyebrow--orange">Preguntas frecuentes</p>
+            <h2 id="faq-title" className="pop-title dpage__h2">Lo que más <span className="t-orange">nos preguntan.</span></h2>
+            <div className="dpage__faq">
+              {FAQ.map(({ q, a }) => (
+                <details key={q}>
+                  <summary>{q}</summary>
+                  <p>{a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
         <section className="dist" id="formulario" aria-labelledby="form-title">
           <div className="dist__inner pop-wrap">
             <div className="dist__copy">
@@ -142,21 +156,6 @@ export default function DistribuidoresPage() {
               </p>
             </div>
             <DistribuidoresForm source="distribuidores" />
-          </div>
-        </section>
-
-        <section className="dpage__section" aria-labelledby="faq-title">
-          <div className="pop-wrap dpage__faq-wrap">
-            <p className="pop-eyebrow pop-eyebrow--orange">Preguntas frecuentes</p>
-            <h2 id="faq-title" className="pop-title dpage__h2">Lo que más <span className="t-orange">nos preguntan.</span></h2>
-            <div className="dpage__faq">
-              {FAQ.map(({ q, a }) => (
-                <details key={q}>
-                  <summary>{q}</summary>
-                  <p>{a}</p>
-                </details>
-              ))}
-            </div>
           </div>
         </section>
       </main>
