@@ -3076,7 +3076,6 @@ html.intro-seen.is-loading { overflow: auto; }
 .dpage__ctas { display: flex; flex-wrap: wrap; gap: .8rem; }
 
 .dpage__hero-media { justify-self: center; width: min(100%, 380px); }
-.dpage__hero-media img { width: 100%; height: auto; filter: drop-shadow(0 10px 40px rgba(8, 42, 84, .5)); }
 
 .dpage__section {
   padding: var(--section-y) 0;
