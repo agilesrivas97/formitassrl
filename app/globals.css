@@ -3265,3 +3265,70 @@ html.intro-seen.is-loading { overflow: auto; }
 @media (max-width: 720px) {
   .trust__list, .dpage__stats ul { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── MAPA INTERACTIVO (/distribuidores) ── */
+.rutas { position: relative; width: 100%; aspect-ratio: 997 / 1578; }
+.rutas > img:first-child { width: 100%; height: 100%; filter: drop-shadow(0 10px 40px rgba(8, 42, 84, .5)); }
+.rutas__face {
+  position: absolute;
+  width: 14%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--orange), 0 0 24px 6px rgba(255, 103, 27, .7);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.rutas__origen {
+  position: absolute;
+  transform: translate(-50%, 130%);
+  padding: .2rem .6rem;
+  border-radius: 100px;
+  background: var(--navy);
+  color: var(--cream);
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.rutas__pin {
+  position: absolute;
+  width: 7%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: rutas-pulse 2.4s ease-out infinite;
+}
+.rutas__pin::before { content: ''; position: absolute; inset: -40%; } /* área táctil más grande */
+.rutas__pin span {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translate(-50%, 6px);
+  padding: .35rem .7rem;
+  border-radius: 100px;
+  background: var(--orange);
+  color: var(--cream);
+  font-size: .72rem;
+  font-weight: 800;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s, transform .2s;
+  z-index: 3;
+}
+.rutas__pin:hover, .rutas__pin:focus-visible { animation: none; box-shadow: 0 0 0 4px var(--yellow), 0 0 18px 6px rgba(245, 189, 58, .7); z-index: 2; }
+.rutas__pin:hover span, .rutas__pin:focus-visible span { opacity: 1; transform: translate(-50%, 0); }
+@keyframes rutas-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 103, 27, .75); }
+  70%, 100% { box-shadow: 0 0 0 14px rgba(255, 103, 27, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .rutas__pin { animation: none; } }
+
+/* Líneas de góndola: todas las cards del mismo tamaño */
+.dpage__lines li { display: flex; }
+.dpage__lines a { flex: 1; align-content: space-between; min-height: 9rem; }

@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import ClientShell from '../components/ClientShell'
 import TopNav from '../components/TopNav'
 import Footer from '../components/Footer'
 import WhatsAppFloat from '../components/WhatsAppFloat'
 import DistribuidoresForm from '../components/DistribuidoresForm'
+import MapaRutas from '../components/MapaRutas'
 import { BENEFICIOS, CIFRAS, FAQ, PASOS } from '../lib/distribuidores'
 import { CATEGORIES, DEFAULT_OG_IMAGE, SITE_URL } from '../lib/seo'
 import { whatsappHref } from '../lib/contact'
@@ -61,7 +61,7 @@ export default function DistribuidoresPage() {
               </div>
             </div>
             <div className="dpage__hero-media">
-              <Image src="/pop/mapa-argentina-hd.webp" alt="Mapa de Argentina con las rutas de distribución desde Mar del Plata" width={997} height={1578} unoptimized preload />
+              <MapaRutas />
             </div>
           </div>
         </section>
