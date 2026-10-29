@@ -2,6 +2,7 @@ import Loader         from './components/Loader'
 import ClientShell    from './components/ClientShell'
 import TopNav         from './components/TopNav'
 import Hero           from './components/Hero'
+import TrustStrip     from './components/TrustStrip'
 import TresAccesos    from './components/TresAccesos'
 import Story          from './components/Story'
 import Universos      from './components/Universos'
@@ -19,11 +20,12 @@ export default function Home() {
       <TopNav />
       <main>
         <Hero />
+        <TrustStrip />
         <TresAccesos />
         <Story />
         <Universos />
-        <Novedades />
         <Distribuidores />
+        <Novedades />
         <Contacto />
       </main>
       <Footer />

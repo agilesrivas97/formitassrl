@@ -6,9 +6,11 @@ import TopNav from '../components/TopNav'
 import Footer from '../components/Footer'
 import WhatsAppFloat from '../components/WhatsAppFloat'
 import DistribuidoresForm from '../components/DistribuidoresForm'
-import { BENEFICIOS, FAQ, PASOS } from '../lib/distribuidores'
+import { BENEFICIOS, CIFRAS, FAQ, PASOS } from '../lib/distribuidores'
 import { CATEGORIES, DEFAULT_OG_IMAGE, SITE_URL } from '../lib/seo'
 import { whatsappHref } from '../lib/contact'
+
+const CATALOGO_MSG = 'Hola! Quiero recibir el catálogo mayorista de Rebozaditos Pop. Mi zona es: '
 
 const TITLE = 'Distribuidores de rebozados congelados'
 const DESCRIPTION =
@@ -64,6 +66,17 @@ export default function DistribuidoresPage() {
           </div>
         </section>
 
+        <section className="dpage__stats" aria-label="Rebozaditos Pop en números">
+          <ul className="pop-wrap">
+            {CIFRAS.map(c => (
+              <li key={c.label}>
+                <strong>{c.value}</strong>
+                <span>{c.label}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         <section className="dpage__section" aria-labelledby="beneficios-title">
           <div className="pop-wrap">
             <p className="pop-eyebrow pop-eyebrow--orange">Por qué Rebozaditos Pop</p>
@@ -94,6 +107,9 @@ export default function DistribuidoresPage() {
                 </li>
               ))}
             </ul>
+            <a href={whatsappHref(CATALOGO_MSG)} target="_blank" rel="noopener noreferrer" className="pop-btn pop-btn--orange pop-btn--lg dpage__catalog" data-track="distribuidores_catalogo">
+              Pedí el catálogo mayorista
+            </a>
           </div>
         </section>
 

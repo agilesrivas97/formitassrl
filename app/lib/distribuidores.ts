@@ -13,6 +13,16 @@ const lines = new Set(PRODUCTS.map(p => p.cat)).size
 
 export const PACK_SIZES_TEXT = packSizes.join(', ').replace(/, ([^,]*)$/, ' y $1')
 
+// Cifras para la franja de la home y las tarjetas de /distribuidores (mismos datos que BENEFICIOS y FAQ).
+export const CIFRAS = [
+  { value: '+100', label: 'clientes mayoristas' },
+  { value: '2014', label: 'fabricando en Mar del Plata' },
+  { value: '1 pallet', label: 'pedido mínimo · 150 cajas' },
+  { value: 'Todo el país', label: 'envíos y exclusividad por zona' },
+]
+
+export const HABILITACIONES = 'Habilitados por SENASA · RNE · RNPA'
+
 export const BENEFICIOS = [
   {
     title: 'Fábrica propia y habilitada',
