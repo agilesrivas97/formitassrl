@@ -21,7 +21,7 @@ export const CIFRAS = [
   { value: 'Todo el país', label: 'envíos y exclusividad por zona' },
 ]
 
-export const HABILITACIONES = 'Habilitados por SENASA · RNE · RNPA'
+export const HABILITACIONES = 'SENASA · RNE · RNPA'
 
 export const BENEFICIOS = [
   {

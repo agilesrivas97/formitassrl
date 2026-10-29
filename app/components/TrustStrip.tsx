@@ -10,8 +10,11 @@ export default function TrustStrip() {
             <span>{c.label}</span>
           </li>
         ))}
+        <li className="trust__seal">
+          <strong>{HABILITACIONES}</strong>
+          <span>fábrica habilitada</span>
+        </li>
       </ul>
-      <p className="trust__seal">{HABILITACIONES}</p>
     </section>
   )
 }

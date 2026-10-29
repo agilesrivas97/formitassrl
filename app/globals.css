@@ -3254,15 +3254,19 @@ html.intro-seen.is-loading { overflow: auto; }
 .trust__list li, .dpage__stats li { display: flex; flex-direction: column; gap: .2rem; align-items: center; }
 .trust__list strong { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 900; color: var(--orange); line-height: 1; }
 .trust__list span { font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); }
-.trust__seal { margin: 1rem 0 0; font-size: .72rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--pop-blue); }
+.trust__list { grid-template-columns: repeat(5, auto); justify-content: space-between; }
+.trust__list li { white-space: nowrap; }
+.trust__seal strong { font-size: clamp(1rem, 1.5vw, 1.25rem); color: var(--pop-blue); }
 
 .dpage__stats { background: var(--navy); color: var(--cream); padding: clamp(2rem, 4vw, 3.4rem) 0; }
 .dpage__stats strong { font-size: clamp(2rem, 4.4vw, 3.6rem); font-weight: 900; color: var(--yellow); line-height: 1; text-align: center; }
 .dpage__stats span { font-size: .85rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; text-align: center; }
 .dpage__catalog { margin-top: 2.4rem; }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .trust__list, .dpage__stats ul { grid-template-columns: repeat(2, 1fr); }
+  .trust__list li { white-space: normal; text-align: center; }
+  .trust__seal { grid-column: 1 / -1; }
 }
 
 /* ── MAPA INTERACTIVO (/distribuidores) ── */
