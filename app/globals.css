@@ -3162,7 +3162,15 @@ html.intro-seen.is-loading { overflow: auto; }
 
 .dpage__lines a > span { font-weight: 800; font-size: var(--fs-label); letter-spacing: .14em; text-transform: uppercase; }
 
-.dpage__faq-wrap { max-width: 900px; }
+.dpage__faq-wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+.dpage__faq-head { position: sticky; top: 6rem; }
+.dpage__faq-head .dpage__h2 { margin-bottom: 1.2rem; }
+.dpage__faq-note { margin: 0; font-weight: 700; color: var(--navy); }
+.dpage__faq-note a { color: var(--orange-deep); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 900px) {
+  .dpage__faq-wrap { grid-template-columns: 1fr; }
+  .dpage__faq-head { position: static; }
+}
 .dpage__faq { display: grid; gap: .8rem; }
 
 .dpage__faq details {
