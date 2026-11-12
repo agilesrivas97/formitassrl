@@ -1,4 +1,4 @@
-import Loader         from './components/Loader'
+import Intro          from './components/Intro'
 import ClientShell    from './components/ClientShell'
 import TopNav         from './components/TopNav'
 import Hero           from './components/Hero'
@@ -9,13 +9,14 @@ import Universos      from './components/Universos'
 import Novedades      from './components/Novedades'
 import Distribuidores from './components/Distribuidores'
 import Contacto       from './components/Contacto'
+import Feed           from './components/Feed'
 import Footer         from './components/Footer'
 import WhatsAppFloat  from './components/WhatsAppFloat'
 
 export default function Home() {
   return (
     <>
-      <Loader />
+      <Intro />
       <ClientShell />
       <TopNav />
       <main>
@@ -27,6 +28,7 @@ export default function Home() {
         <Distribuidores />
         <Novedades />
         <Contacto />
+        <Feed />
       </main>
       <Footer />
       <WhatsAppFloat />

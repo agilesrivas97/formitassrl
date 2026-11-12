@@ -91,7 +91,7 @@ export default async function ProductoPage({ params }: { params: Promise<Params>
 
           <article className="producto__main">
             <div className="producto__media">
-              <ProductImg prod={prod} />
+              <ProductImg prod={prod} sizes="(max-width: 860px) 90vw, 520px" />
             </div>
 
             <div className="producto__info">
@@ -134,7 +134,7 @@ export default async function ProductoPage({ params }: { params: Promise<Params>
                 {related.map(r => (
                   <li key={r.slug}>
                     <Link href={productHref(r)} className="producto__related-card">
-                      <span className="producto__related-media"><ProductImg prod={r} /></span>
+                      <span className="producto__related-media"><ProductImg prod={r} sizes="(max-width: 860px) 45vw, 240px" /></span>
                       <span>{r.title}</span>
                     </Link>
                   </li>

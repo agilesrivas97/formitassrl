@@ -45,7 +45,7 @@ export default function Contacto() {
         <a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="pop-btn pop-btn--orange pop-btn--xl" data-cursor="grow">
           Escribinos
         </a>
-        <Image className="contacto__mascot" src="/pop/mascota-caminando.webp" alt="" width={626} height={626} loading="eager" />
+        <Image className="contacto__mascot" src="/pop/mascota-caminando.webp" alt="" width={626} height={626} />
       </div>
 
       <ul className="contacto__cards pop-wrap">

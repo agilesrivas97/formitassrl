@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { productHref, type Prod } from '../lib/products'
 
 const SHAPES: Record<string, (accent: string) => ReactElement> = {
@@ -82,8 +83,9 @@ const SHAPES: Record<string, (accent: string) => ReactElement> = {
   ),
 }
 
-export function ProductImg({ prod }: { prod: Prod }) {
-  if (prod.image) return <img src={prod.image} alt={prod.title} className="card__img" loading="lazy" />
+// Las fotos originales miden ~3500 px: next/image las sirve al tamaño real en pantalla (webp liviano).
+export function ProductImg({ prod, sizes = '(max-width: 620px) 90vw, (max-width: 980px) 45vw, 380px' }: { prod: Prod; sizes?: string }) {
+  if (prod.image) return <Image src={prod.image} alt={prod.title} className="card__img" fill sizes={sizes} />
   const shape = SHAPES[prod.shape] ?? SHAPES['medallon']
   return shape(prod.accent)
 }

@@ -6,22 +6,22 @@ export default function Distribuidores() {
     <>
       <section className="mapa" id="distribucion" aria-labelledby="mapa-title">
         <div className="mapa__media" aria-hidden="true">
-          <Image src="/pop/distribucion-deposito.webp" alt="" fill sizes="100vw" />
+          <Image src="/pop/distribucion-deposito.webp" alt="" fill sizes="100vw" quality={55} />
           <div className="mapa__map">
-            <Image src="/pop/mapa-argentina-hd.webp" alt="" width={997} height={1578} unoptimized />
+            <Image src="/pop/mapa-argentina-hd.webp" alt="" width={997} height={1578} sizes="(max-width: 900px) 80vw, 480px" quality={80} />
             <Image className="mapa__face" src="/logos/logo-cara.png" alt="" width={64} height={64} />
           </div>
         </div>
         <div className="mapa__copy">
           <h2 id="mapa-title" className="mapa__title">
-            Llevá
-            <span><span className="t-orange">Rebozaditos</span> <span className="t-blue">Pop</span></span>
-            a tu zona.
+            Llevá <span className="t-orange">Rebozaditos Pop</span> a tu zona.
           </h2>
           <p className="mapa__sub">De Mar del Plata a todo el país</p>
-          <p className="mapa__item">01 · Buscamos distribuidores mayoristas</p>
-          <p className="mapa__item">Sumate a nuestra red de distribuidores</p>
-          <a href="#sumate" className="pop-btn pop-btn--orange pop-btn--xl" data-cursor="grow" data-track="quiero_distribuir_mapa">Quiero ser distribuidor</a>
+          <ul className="mapa__list">
+            <li>Buscamos distribuidores mayoristas</li>
+            <li>Sumate a nuestra red de distribuidores</li>
+          </ul>
+          <a href="#sumate" className="pop-btn pop-btn--orange pop-btn--lg" data-cursor="grow" data-track="quiero_distribuir_mapa">Quiero ser distribuidor</a>
         </div>
       </section>
 

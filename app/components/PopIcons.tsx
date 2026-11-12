@@ -54,11 +54,9 @@ export const IconMariscos = (p: IconProps) => (
 
 export const IconVegetales = (p: IconProps) => (
   <svg viewBox="0 0 64 64" aria-hidden="true" {...p}>
-    <path d="M6 30 c4 -16 20 -24 36 -22 c-2 16 -16 28 -36 22z" fill="currentColor" />
-    <path d="M8 30 l26 -16" stroke="var(--icon-bg, #fff)" strokeWidth="3" strokeLinecap="round" />
-    <path d="M28 34 l30 12 l-30 14z" fill="var(--orange)" />
-    <circle cx="38" cy="45" r="3" fill="var(--icon-bg, #fff)" />
-    <circle cx="33" cy="53" r="2" fill="var(--icon-bg, #fff)" />
+    <path d="M8 54 C6 28 24 8 56 8 C58 38 42 58 8 54z" fill="currentColor" />
+    <path d="M12 50 C22 36 32 26 46 18" stroke="var(--icon-bg, #fff)" strokeWidth="3.5" strokeLinecap="round" fill="none" />
+    <path d="M24 38 l-1 -10 M32 31 l-1 -9 M30 40 l9 -2" stroke="var(--icon-bg, #fff)" strokeWidth="2.5" strokeLinecap="round" fill="none" />
   </svg>
 )
 

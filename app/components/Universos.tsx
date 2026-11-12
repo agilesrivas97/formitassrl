@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactElement } from 'react'
 import UniversosIntro from './UniversosIntro'
+import { CAT_TINTS } from '../lib/products'
 import { IconMariscos, IconPescado, IconPollo, IconVegetales } from './PopIcons'
 
 type Universo = {
@@ -9,15 +10,23 @@ type Universo = {
   num: string
   label: string
   icon: ReactElement
-  variant: 'orange' | 'cream' | 'blue' | 'cream-ring'
+  image: string
 }
 
 const UNIVERSOS: Universo[] = [
-  { id: 'pollo', num: '01', label: 'Pollo', icon: <IconPollo />, variant: 'orange' },
-  { id: 'pescado', num: '02', label: 'Pescado', icon: <IconPescado />, variant: 'cream' },
-  { id: 'mariscos', num: '03', label: 'Mariscos', icon: <IconMariscos />, variant: 'blue' },
-  { id: 'vegetales', num: '04', label: 'Vegetales y quesos', icon: <IconVegetales />, variant: 'cream-ring' },
+  { id: 'pollo', num: '01', label: 'Pollo', icon: <IconPollo />, image: '/platos/plato-3.webp' },
+  { id: 'mariscos', num: '02', label: 'Mariscos', icon: <IconMariscos />, image: '/platos/plato-4.webp' },
+  { id: 'pescado', num: '03', label: 'Pescado', icon: <IconPescado />, image: '/platos/plato-2.webp' },
+  { id: 'vegetales', num: '04', label: 'Vegetales y quesos', icon: <IconVegetales />, image: '/platos/plato-1.webp' },
 ]
+
+// Colores de fondo de los círculos: pollo y pescado vienen de la versión anterior del catálogo;
+// mariscos y vegetales siguen la paleta actual. Solo afecta a esta sección (no al catálogo).
+const TINTS: Record<string, string> = {
+  ...CAT_TINTS,
+  pollo: '#F5A623',
+  pescado: '#0B5C8F',
+}
 
 export default function Universos() {
   return (
@@ -29,7 +38,7 @@ export default function Universos() {
           <p className="pop-eyebrow pop-eyebrow--orange">04 - Explorá nuestros productos</p>
           <h2 id="universos-title" className="pop-title universos__title">
             Cuatro universos.<br />
-            <span className="t-orange">Muchas formas</span> de<br />comer rico.
+            <span className="t-orange">Muchas formas</span><br />de comer rico.
           </h2>
         </div>
         <p className="universos__lede">
@@ -47,13 +56,14 @@ export default function Universos() {
         </svg>
 
         {UNIVERSOS.map(u => (
-          <Link key={u.id} href={`/catalogo/${u.id}`} className={`planeta planeta--${u.variant}`} data-cursor="grow">
+          <Link key={u.id} href={`/catalogo/${u.id}`} className={`planeta planeta--${u.id}`} style={{ ['--tint' as string]: TINTS[u.id] }} data-cursor="grow">
+            <span className="planeta__bg" aria-hidden="true">
+              <Image src={u.image} alt="" fill sizes="(max-width: 639px) 100vw, (max-width: 1079px) 340px, 320px" />
+            </span>
             <span className="planeta__ring" aria-hidden="true" />
             <span className="planeta__moon" aria-hidden="true" />
-            <span className="planeta__num">{u.num}</span>
             <span className="planeta__icon">{u.icon}</span>
             <span className="planeta__label">{u.label}</span>
-            <span className="planeta__cta">Entrar al universo<span aria-hidden="true"> →</span></span>
           </Link>
         ))}
       </div>

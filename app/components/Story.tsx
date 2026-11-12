@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import StoryCarousel from './StoryCarousel'
 
 const STEPS = ['El origen', 'La elaboración', 'El resultado'] as const
 
@@ -21,7 +22,7 @@ function Progress({ active }: { active: number }) {
 
 export default function Story() {
   return (
-    <div id="historia">
+    <StoryCarousel labels={STEPS}>
       {/* 01 · El origen */}
       <section className="chapter chapter--origen" aria-labelledby="ch1-title">
         <div className="chapter__inner pop-wrap">
@@ -124,7 +125,9 @@ export default function Story() {
             <span className="chapter__num">03</span>
           </figure>
         </div>
+        {/* Mascot asomando desde el borde de la pantalla (decorativo) */}
+        <Image className="chapter__peeker" src="/pop/mascota-asomando.webp" alt="" aria-hidden="true" width={612} height={408} />
       </section>
-    </div>
+    </StoryCarousel>
   )
 }

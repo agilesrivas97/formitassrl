@@ -12,7 +12,7 @@ const ORIGEN: [number, number] = [75.9, 48.2]
 export default function MapaRutas() {
   return (
     <div className="rutas">
-      <Image src="/pop/mapa-argentina-hd.webp" alt="Mapa de Argentina con las rutas de distribución desde Mar del Plata" width={997} height={1578} unoptimized preload />
+      <Image src="/pop/mapa-argentina-hd.webp" alt="Mapa de Argentina con las rutas de distribución desde Mar del Plata" width={997} height={1578} sizes="(max-width: 900px) 90vw, 560px" quality={80} preload />
       <Image
         className="rutas__face"
         src="/logos/logo-cara.png"

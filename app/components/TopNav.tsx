@@ -35,7 +35,7 @@ export default function TopNav() {
     <header ref={nav} className={`topnav${open ? ' is-open' : ''}`}>
       <div className="topnav__bar">
         <Link href="/" className="topnav__brand" aria-label="Rebozaditos Pop — inicio" onClick={() => setOpen(false)}>
-          <Image src="/logos/rebozaditos.png" alt="Rebozaditos Pop" width={791} height={395} preload />
+          <Image src="/logos/rebozaditos.png" alt="Rebozaditos Pop" width={791} height={395} sizes="200px" preload />
         </Link>
 
         <nav className="topnav__links" aria-label="Principal">

@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { INTRO_DONE_EVENT } from './Loader'
+import { INTRO_DONE_EVENT } from './Intro'
 
 const SLIDES = [
   { src: '/pop/hero/01-filet-sin-logo.webp', alt: 'Filets de merluza rebozados Rebozaditos Pop' },
@@ -23,6 +23,9 @@ export default function HeroMedia() {
   const [ready, setReady] = useState(false)
   const [entered, setEntered] = useState(false)
   const [orbiting, setOrbiting] = useState(false)
+  const [seen, setSeen] = useState<Set<number>>(() => new Set([0]))
+  // Ajuste durante el render (patrón de React): una foto ya mostrada queda montada
+  if (!seen.has(index)) setSeen(new Set(seen).add(index))
   const timers = useRef<number[]>([])
 
   // Arranca cuando termina el loader
@@ -76,7 +79,9 @@ export default function HeroMedia() {
       <div className="hero__cream" />
       <div className="hero__photo" aria-live="polite">
         {SLIDES.map((s, i) => (
-          <Image
+          // Solo se monta la foto actual y la siguiente (más las ya vistas): en conexión
+          // lenta no se bajan las 5 a la vez compitiendo con la primera.
+          !seen.has(i) && !(ready && i === (index + 1) % SLIDES.length) ? null : <Image
             key={s.src}
             src={s.src}
             alt={i === index ? s.alt : ''}
