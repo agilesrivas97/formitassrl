@@ -34,6 +34,7 @@ const alreadyPlayed = () => typeof window !== 'undefined' && !!(window as PopWin
 export default function Intro() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [started, setStarted] = useState(false)
+  const [playing, setPlaying] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [activeId, setActiveId] = useState<number | null>(null)
   const [closeStage, setCloseStage] = useState<'idle' | 'closing' | 'shut' | 'opening'>('idle')
@@ -63,6 +64,29 @@ export default function Intro() {
   useEffect(() => {
     document.documentElement.classList.toggle('is-loading', !dismissed)
     return () => document.documentElement.classList.remove('is-loading')
+  }, [dismissed])
+
+  // Calentar el video mientras la persona lee la intro: cuando la página ya cargó y la
+  // conexión no es lenta ni de ahorro de datos, se baja el mp4 (1,4 MB) y la imagen final
+  // en segundo plano, así "Conocé la nuestra" arranca al instante.
+  useEffect(() => {
+    if (dismissed) return
+    type Conn = { saveData?: boolean; effectiveType?: string }
+    const conn = (navigator as Navigator & { connection?: Conn }).connection
+    if (conn?.saveData || /(^|-)2g$/.test(conn?.effectiveType ?? '')) return
+    let cancelled = false
+    const warm = () => {
+      if (cancelled) return
+      const v = videoRef.current
+      if (v) { v.preload = 'auto'; v.load() }
+      const img = new window.Image()
+      img.src = '/video/end_freezer.webp'
+    }
+    const idle = (window as Window & { requestIdleCallback?: (cb: () => void) => number }).requestIdleCallback
+    const start = () => (idle ? idle(warm) : window.setTimeout(warm, 300))
+    if (document.readyState === 'complete') start()
+    else window.addEventListener('load', start, { once: true })
+    return () => { cancelled = true; window.removeEventListener('load', start) }
   }, [dismissed])
 
   useEffect(() => {
@@ -107,7 +131,8 @@ export default function Intro() {
     <section className="inmersiva" aria-label="Abrí tu heladera Formitas">
       {!contentHidden && (
         <div className="inmersiva__frame" data-card-open={active ? 'true' : undefined}>
-          {/* preload="none": en conexión lenta no se baja el video hasta que lo tocan.
+          {/* preload="none" al inicio: no compite con el primer render. Cuando la página terminó
+              de cargar (y la conexión lo permite) se pasa a "auto" en el efecto de arriba.
               Mientras tanto se ve el poster (webp liviano). */}
           <video
             ref={videoRef}
@@ -116,6 +141,7 @@ export default function Intro() {
             playsInline
             preload="none"
             poster="/video/init_freezer.webp"
+            onPlaying={() => setPlaying(true)}
             onEnded={() => setIsOpen(true)}
           >
             <source src="/video/escena_init.mp4" type="video/mp4" />
@@ -127,6 +153,7 @@ export default function Intro() {
             <img className="inmersiva__video inmersiva__end-img" data-visible={isOpen} src="/video/end_freezer.webp" alt="" />
           )}
           <div className="inmersiva__scrim" aria-hidden="true" />
+          {started && !playing && !isOpen && <span className="inmersiva__spinner" role="status" aria-label="Cargando video" />}
 
           {!started && (
             <>

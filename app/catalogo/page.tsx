@@ -5,7 +5,7 @@ import CatalogFull    from '../components/CatalogFull'
 import Footer         from '../components/Footer'
 import WhatsAppFloat  from '../components/WhatsAppFloat'
 import { PRODUCTS } from '../lib/products'
-import { DEFAULT_OG_IMAGE, SITE_URL } from '../lib/seo'
+import { DEFAULT_OG_IMAGE, SITE_URL, breadcrumbJsonLd } from '../lib/seo'
 
 const TITLE = 'Catálogo de rebozados congelados'
 const DESCRIPTION = 'Todos los rebozados congelados Rebozaditos Pop: pollo, pescado, mariscos, vegetales y quesos. Filtrá por categoría y mirá las presentaciones disponibles.'
@@ -57,7 +57,7 @@ export default function CatalogoPage() {
       <WhatsAppFloat />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(catalogJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([catalogJsonLd, breadcrumbJsonLd([{ name: 'Inicio', url: SITE_URL }, { name: 'Catálogo', url: `${SITE_URL}/catalogo` }])]) }}
       />
     </>
   )
