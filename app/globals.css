@@ -4104,3 +4104,26 @@ html.intro-seen.is-loading { overflow: auto; }
 }
 @keyframes inmersiva-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .inmersiva__spinner { animation-duration: 2s; } }
+
+/* ── PREGUNTAS FRECUENTES (home) ── */
+.faqhome { background: var(--cream); padding: clamp(3.5rem, 7vw, 6rem) 0; }
+.faqhome__inner { display: grid; gap: 2rem; }
+.faqhome__title { font-size: clamp(1.7rem, 3.1vw, 2.8rem); margin: .5rem 0 1rem; }
+.faqhome__lede { margin: 0; color: var(--navy); font-size: 1.02rem; line-height: 1.55; max-width: 46ch; }
+.faqhome__list { display: grid; gap: .75rem; align-content: start; }
+.faqhome__item { background: #fff; border-radius: 16px; box-shadow: 0 6px 18px rgba(8, 42, 84, .07); }
+.faqhome__item summary {
+  list-style: none; cursor: pointer; padding: 1.1rem 3.2rem 1.1rem 1.3rem; position: relative;
+  font-weight: 700; color: var(--navy); line-height: 1.3;
+}
+.faqhome__item summary::-webkit-details-marker { display: none; }
+.faqhome__item summary::after {
+  content: '+'; position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%);
+  font-size: 1.5rem; font-weight: 700; color: var(--orange); transition: transform .2s ease;
+}
+.faqhome__item[open] summary::after { content: '–'; }
+.faqhome__item p { margin: 0; padding: 0 1.3rem 1.2rem; color: var(--navy); line-height: 1.6; }
+@media (min-width: 960px) {
+  .faqhome__inner { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .faqhome__intro { position: sticky; top: calc(var(--nav-h) + var(--nav-gap) + 1.5rem); }
+}

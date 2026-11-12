@@ -10,6 +10,7 @@ import Novedades      from './components/Novedades'
 import Distribuidores from './components/Distribuidores'
 import Contacto       from './components/Contacto'
 import Feed           from './components/Feed'
+import FaqHome        from './components/FaqHome'
 import Footer         from './components/Footer'
 import WhatsAppFloat  from './components/WhatsAppFloat'
 
@@ -29,6 +30,7 @@ export default function Home() {
         <Novedades />
         <Contacto />
         <Feed />
+        <FaqHome />
       </main>
       <Footer />
       <WhatsAppFloat />
