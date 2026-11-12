@@ -1,67 +1,45 @@
-import Image from 'next/image'
-
-const PROD_IMAGES = [
-  { src: '/platos/plato-3.webp', alt: 'Medallones rebozados servidos en plato', cls: 'hero__prod--a' },
-  { src: '/platos/plato-2.webp', alt: 'Filet de merluza rebozado servido en plato', cls: 'hero__prod--b' },
-  { src: '/platos/plato-1.webp', alt: 'Barritas de muzzarella servidas en plato', cls: 'hero__prod--c' },
-  { src: '/platos/plato-4.webp', alt: 'Rabas de calamar servidas en plato', cls: 'hero__prod--d' },
-]
+import HeroMedia from './HeroMedia'
 
 export default function Hero() {
   return (
     <section className="hero" aria-label="Bienvenida" id="top">
-      <div className="hero__dots" />
+      <div className="hero__blob" aria-hidden="true" />
+      <span className="pop-dot pop-dot--yellow hero__dot hero__dot--1" aria-hidden="true" />
+      <span className="pop-dot pop-dot--yellow hero__dot hero__dot--2" aria-hidden="true" />
+      <span className="pop-dot pop-dot--yellow hero__dot hero__dot--3" aria-hidden="true" />
+      <span className="pop-dot pop-dot--yellow hero__dot hero__dot--4" aria-hidden="true" />
 
-      <div className="hero__copy">
-        <div className="hero__eyebrow">
-          <span className="hero__eyebrow-dot" />
-          Mar del Plata · Desde 2014
+      <div className="hero__inner">
+        <div className="hero__copy">
+          {/* El eyebrow va dentro del H1: así el título que lee Google incluye
+              "rebozados congelados" y "Mar del Plata", sin cambiar el diseño */}
+          <h1 className="hero__title">
+            <span className="pop-eyebrow hero__eyebrow">Rebozados congelados de calidad · Desde Mar del Plata al mundo</span>
+            <span>Fáciles de<br /> preparar.</span>
+            <span className="hero__title-alt">Difíciles de<br /> ignorar.</span>
+          </h1>
+
+          <p className="hero__desc">
+            Elaborando calidad desde 2014.<br />
+            Variedad para resolver las comidas de todos los días sin caer siempre en lo mismo.
+          </p>
+
+          <div className="hero__ctas">
+            <a href="/distribuidores" className="pop-btn pop-btn--navy pop-btn--lg" data-cursor="grow" data-track="hero_sumalos">
+              Sumalos a tu negocio
+            </a>
+            <a href="#productos" className="pop-btn pop-btn--outline-light pop-btn--lg" data-cursor="grow">
+              Ver productos
+            </a>
+          </div>
         </div>
 
-        <h1 className="hero__final-title">
-          <em>Solucionaste</em> la cena.
-        </h1>
-
-        <div className="hero__ctas">
-          <a href="#productos" className="btn btn--hero" data-cursor="grow">
-            Ver productos <span aria-hidden="true">→</span>
-          </a>
-          <a href="#distribuidores" className="btn btn--ghost" data-cursor="grow">
-            Quiero ser distribuidor <span aria-hidden="true">→</span>
-          </a>
-        </div>
+        <HeroMedia />
       </div>
 
-      <div className="hero__stage">
-        <div className="hero__sparks" aria-hidden="true">
-          {[
-            { x: '8%', y: '14%', d: '0s', t: '★' },
-            { x: '88%', y: '18%', d: '.5s', t: '✦' },
-            { x: '14%', y: '78%', d: '1s', t: '✦' },
-            { x: '82%', y: '74%', d: '.3s', t: '★' },
-          ].map((s, i) => (
-            <span key={i} style={{ ['--x' as string]: s.x, ['--y' as string]: s.y, ['--d' as string]: s.d }}>{s.t}</span>
-          ))}
-        </div>
-
-        <div className="hero__mascot">
-          <img src="/mascot/06-point.webp" alt="Mascota Formitas señalando los productos" />
-        </div>
-
-        <div className="hero__products">
-          {PROD_IMAGES.map(p => (
-            <div key={p.src} className={`hero__prod ${p.cls}`}>
-              <Image src={p.src} alt={p.alt} width={280} height={280} />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="hero__marquee" aria-hidden="true">
-        <div className="hero__marquee-track">
-          <span>· Rebozado artesanal · Sin conservantes · Pescado del Atlántico Sur · Hecho en Mar del Plata · Listo en 12 min · Rebozado artesanal · Sin conservantes · Pescado del Atlántico Sur · Hecho en Mar del Plata · Listo en 12 min</span>
-        </div>
-      </div>
+      <svg className="hero__wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 70 C 240 10 480 10 760 60 S 1240 120 1440 50 V120 H0z" fill="var(--cream)" />
+      </svg>
     </section>
   )
 }

@@ -1,6 +1,6 @@
 {
-  "name": "Congelados Formitas",
-  "short_name": "Formitas",
+  "name": "Rebozaditos Pop",
+  "short_name": "Rebozaditos Pop",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -15,7 +15,7 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#FA5000",
-  "background_color": "#FFFBF5",
+  "theme_color": "#FF671B",
+  "background_color": "#FFF5E7",
   "display": "standalone"
 }

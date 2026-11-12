@@ -1,7 +1,30 @@
 import type { Metadata } from 'next'
 import Script from 'next/script'
+import { Unbounded, Instrument_Sans, Lilita_One } from 'next/font/google'
 import './globals.css'
 import { BUSINESS, DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, DEFAULT_TITLE, SITE_NAME, SITE_URL } from './lib/seo'
+
+const unbounded = Unbounded({
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '800', '900'],
+  display: 'swap',
+  variable: '--font-unbounded',
+})
+
+const instrumentSans = Instrument_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-instrument',
+})
+
+const lilita = Lilita_One({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  variable: '--font-lilita',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -18,6 +41,8 @@ export const metadata: Metadata = {
     'nuggets de pollo congelados',
     'medallones de merluza congelados',
     'formitas',
+    'rebozaditos pop',
+    'rebodinos',
   ],
   alternates: {
     canonical: '/',
@@ -61,7 +86,7 @@ const organizationJsonLd = {
   sameAs: BUSINESS.sameAs,
   areaServed: {
     '@type': 'AdministrativeArea',
-    name: 'Costa Atlántica y AMBA, Argentina',
+    name: 'Argentina',
   },
 }
 
@@ -69,22 +94,15 @@ const gaId = process.env.NEXT_PUBLIC_GA_ID
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-AR" suppressHydrationWarning>
+    <html lang="es-AR" className={`${unbounded.variable} ${instrumentSans.variable} ${lilita.variable}`} suppressHydrationWarning>
       <head>
+        {/* Antes de pintar: si ya vio la intro esta semana, html.intro-seen oculta el loader */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(sessionStorage.getItem('formitas-intro-seen')){document.documentElement.classList.add('intro-seen')}}catch(e){}`,
+            __html: `try{var t=+localStorage.getItem('pop-intro-seen');if(t&&Date.now()-t<6048e5)document.documentElement.classList.add('intro-seen')}catch(e){}`,
           }}
         />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap"
-        />
-
         <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />

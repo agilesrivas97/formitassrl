@@ -1,5 +1,7 @@
 import type { ReactElement } from 'react'
-import type { Prod } from '../lib/products'
+import Link from 'next/link'
+import Image from 'next/image'
+import { productHref, type Prod } from '../lib/products'
 
 const SHAPES: Record<string, (accent: string) => ReactElement> = {
   filet: (accent) => (
@@ -81,8 +83,9 @@ const SHAPES: Record<string, (accent: string) => ReactElement> = {
   ),
 }
 
-function ProductImg({ prod }: { prod: Prod }) {
-  if (prod.image) return <img src={prod.image} alt={prod.title} className="card__img" loading="lazy" />
+// Las fotos originales miden ~3500 px: next/image las sirve al tamaño real en pantalla (webp liviano).
+export function ProductImg({ prod, sizes = '(max-width: 620px) 90vw, (max-width: 980px) 45vw, 380px' }: { prod: Prod; sizes?: string }) {
+  if (prod.image) return <Image src={prod.image} alt={prod.title} className="card__img" fill sizes={sizes} />
   const shape = SHAPES[prod.shape] ?? SHAPES['medallon']
   return shape(prod.accent)
 }
@@ -109,7 +112,10 @@ export default function ProductCard({ prod, open, onToggle, hidden }: ProductCar
       </div>
       <div className="card__body">
         <div className="card__meta">{prod.badge} · {prod.packSize}</div>
-        <h3 className="card__title">{prod.title}</h3>
+        {/* El título linkea a la ficha (y Google la descubre desde el catálogo); el resto de la tarjeta despliega */}
+        <h3 className="card__title">
+          <Link href={productHref(prod)} onClick={e => e.stopPropagation()}>{prod.title}</Link>
+        </h3>
         <button
           className="card__open"
           aria-label="Ver detalles"
@@ -126,6 +132,9 @@ export default function ProductCard({ prod, open, onToggle, hidden }: ProductCar
           ))}
         </div>
         <div className="card__attr">{prod.attr}</div>
+        <Link href={productHref(prod)} className="card__link" onClick={e => e.stopPropagation()}>
+          Ver ficha del producto <span aria-hidden="true">→</span>
+        </Link>
       </div>
     </article>
   )

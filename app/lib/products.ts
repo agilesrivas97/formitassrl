@@ -1,9 +1,10 @@
 import rawProducts from '../../data/products.json'
 
 export const CAT_TINTS: Record<string, string> = {
-  pollo:      '#F5A623',
-  pescado:    '#0B5C8F',
-  especiales: '#E8440A',
+  pollo:     '#FF671B',
+  pescado:   '#0967BD',
+  mariscos:  '#082A54',
+  vegetales: '#2E7D4F',
 }
 
 export type ProdData = {
@@ -14,16 +15,31 @@ export type ProdData = {
   attr: string
 }
 
-export type Prod = ProdData & { accent: string }
+export type Prod = ProdData & { accent: string; slug: string }
+
+// "Medallón de pollo con jamón y mozzarella" → "medallon-de-pollo-con-jamon-y-mozzarella"
+export const slugify = (text: string) =>
+  text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
 
 export const PRODUCTS: Prod[] = (rawProducts as ProdData[]).map(p => ({
   ...p,
   accent: CAT_TINTS[p.cat] ?? '#888',
+  slug: slugify(p.title),
 }))
+
+export const getProduct = (slug: string) => PRODUCTS.find(p => p.slug === slug)
+
+export const productHref = (p: Pick<Prod, 'slug'>) => `/producto/${p.slug}`
 
 export const PILLS = [
   { id: 'all',        label: 'Todo',       accent: undefined },
-  { id: 'pollo',      label: 'Pollo',      accent: '#F5A623' },
-  { id: 'pescado',    label: 'Pescado',    accent: '#0B5C8F' },
-  { id: 'especiales', label: 'Especiales', accent: '#E8440A' },
+  { id: 'pollo',      label: 'Pollo',              accent: CAT_TINTS.pollo },
+  { id: 'pescado',    label: 'Pescado',            accent: CAT_TINTS.pescado },
+  { id: 'mariscos',   label: 'Mariscos',           accent: CAT_TINTS.mariscos },
+  { id: 'vegetales',  label: 'Vegetales y quesos', accent: CAT_TINTS.vegetales },
 ]

@@ -1,7 +1,15 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 
-const INTRO_KEY = 'formitas-intro-seen'
+// Contrato con el resto del sitio (lo usa HeroMedia para arrancar su animación)
+export const INTRO_DONE_EVENT = 'pop:intro-done'
+
+// Solo se muestra en la primera visita (y de nuevo pasada una semana). El script inline de
+// layout.tsx lee esta clave antes de pintar y agrega html.intro-seen, que oculta la intro por CSS.
+export const INTRO_STORAGE_KEY = 'pop-intro-seen'
+
+type PopWindow = Window & { __popIntroDone?: boolean }
 
 type Shelf = {
   x: number
@@ -14,31 +22,48 @@ type Shelf = {
   tint: string
 }
 
-// Mismos colores que CAT_TINTS (app/lib/products.ts) usados en la sección de catálogo.
+// Mismos destinos que "Tres accesos" de la home.
 const SHELVES: Shelf[] = [
-  { x: 50, y: 23, dir: 'down', eyebrow: 'Quiénes somos', title: 'Desde 2014 elaborando calidad', href: '/#historia', image: '/platos/plato-3.webp', tint: '#E8440A' },
-  { x: 50, y: 47, dir: 'down', eyebrow: 'Productos', title: 'Conocé nuestro catálogo de productos', href: '/catalogo', image: '/platos/plato-1.webp', tint: '#0B5C8F' },
-  { x: 50, y: 77, dir: 'up', eyebrow: 'Quiero ser distribuidor', title: 'Comercializá nuestros productos', href: '/#distribuidores', image: '/platos/plato-4.webp', tint: '#F5A623' },
+  { x: 50, y: 23, dir: 'down', eyebrow: 'Quiénes somos', title: 'Desde 2014 elaborando calidad', href: '#historia', image: '/platos/plato-3.webp', tint: '#FF671B' },
+  { x: 50, y: 47, dir: 'down', eyebrow: 'Productos', title: 'Conocé nuestro catálogo de productos', href: '/catalogo', image: '/platos/plato-1.webp', tint: '#0967BD' },
+  { x: 50, y: 77, dir: 'up', eyebrow: 'Quiero ser distribuidor', title: 'Comercializá nuestros productos', href: '/distribuidores', image: '/platos/plato-4.webp', tint: '#F5BD3A' },
 ]
 
-export default function Inmersiva() {
+const alreadyPlayed = () => typeof window !== 'undefined' && !!(window as PopWindow).__popIntroDone
+
+export default function Intro() {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [started, setStarted] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [activeId, setActiveId] = useState<number | null>(null)
   const [closeStage, setCloseStage] = useState<'idle' | 'closing' | 'shut' | 'opening'>('idle')
-  const [dismissed, setDismissed] = useState(false)
+  const [dismissed, setDismissed] = useState(() => alreadyPlayed())
 
+  const finish = () => {
+    setDismissed(true)
+    ;(window as PopWindow).__popIntroDone = true
+    try { localStorage.setItem(INTRO_STORAGE_KEY, String(Date.now())) } catch { }
+    window.dispatchEvent(new Event(INTRO_DONE_EVENT))
+  }
+
+  // Visita repetida: el CSS ya la ocultó; avisamos al hero en el próximo frame.
   useEffect(() => {
-    let alreadySeen = false
-    try { alreadySeen = !!sessionStorage.getItem(INTRO_KEY) } catch { }
-    if (alreadySeen) {
-      setDismissed(true)
-      return
+    if (alreadyPlayed()) return
+    if (document.documentElement.classList.contains('intro-seen')) {
+      const raf = requestAnimationFrame(() => {
+        setDismissed(true)
+        ;(window as PopWindow).__popIntroDone = true
+        window.dispatchEvent(new Event(INTRO_DONE_EVENT))
+      })
+      return () => cancelAnimationFrame(raf)
     }
-    document.body.style.overflow = 'hidden'
-    return () => { document.body.style.overflow = '' }
   }, [])
+
+  // Mientras la intro está en pantalla, no se scrollea la página de atrás.
+  useEffect(() => {
+    document.documentElement.classList.toggle('is-loading', !dismissed)
+    return () => document.documentElement.classList.remove('is-loading')
+  }, [dismissed])
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -59,24 +84,17 @@ export default function Inmersiva() {
       setIsOpen(true)
       return
     }
-
     video.play()
   }
 
-  const handleEnded = () => setIsOpen(true)
-
-  const handleDismiss = () => {
-    try { sessionStorage.setItem(INTRO_KEY, '1') } catch { }
-    document.body.style.overflow = ''
-    setDismissed(true)
-  }
+  // Un link del hotspot cierra la intro sin cortina: el destino ya es la página.
+  const handleLink = () => finish()
 
   const handleSkip = () => {
-    try { sessionStorage.setItem(INTRO_KEY, '1') } catch { }
     setCloseStage('closing')
     setTimeout(() => setCloseStage('shut'), 550)
     setTimeout(() => setCloseStage('opening'), 1650)
-    setTimeout(() => { document.body.style.overflow = ''; setDismissed(true) }, 2200)
+    setTimeout(finish, 2200)
   }
 
   if (dismissed) return null
@@ -89,26 +107,30 @@ export default function Inmersiva() {
     <section className="inmersiva" aria-label="Abrí tu heladera Formitas">
       {!contentHidden && (
         <div className="inmersiva__frame" data-card-open={active ? 'true' : undefined}>
+          {/* preload="none": en conexión lenta no se baja el video hasta que lo tocan.
+              Mientras tanto se ve el poster (webp liviano). */}
           <video
             ref={videoRef}
             className="inmersiva__video"
             muted
             playsInline
-            preload="metadata"
-            poster="/video/init_freezer.png"
-            onEnded={handleEnded}
+            preload="none"
+            poster="/video/init_freezer.webp"
+            onEnded={() => setIsOpen(true)}
           >
             <source src="/video/escena_init.mp4" type="video/mp4" />
           </video>
-          {/* Montada desde el arranque (oculta) para que el navegador la precargue
-              mientras corre el video — así al terminar hace un crossfade en vez de
-              un parpadeo esperando a que la imagen recién empiece a bajar. */}
-          <img className="inmersiva__video inmersiva__end-img" data-visible={isOpen} src="/video/end_freezer.png" alt="" />
+          {/* Se monta recién al empezar el video (no antes) para no gastar datos
+              de quien salta la intro. Crossfade al terminar. */}
+          {started && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img className="inmersiva__video inmersiva__end-img" data-visible={isOpen} src="/video/end_freezer.webp" alt="" />
+          )}
           <div className="inmersiva__scrim" aria-hidden="true" />
 
           {!started && (
             <>
-              <img className="inmersiva__brand" src="/logos/rebozaditos.png" alt="Rebozaditos Pop" />
+              <Image className="inmersiva__brand" src="/logos/rebozaditos.png" alt="Rebozaditos Pop" width={791} height={395} sizes="260px" preload />
               <button className="inmersiva__cta" onClick={handleOpen}>
                 <p className="inmersiva__tagline">
                   Cada heladera cuenta una historia.
@@ -149,11 +171,12 @@ export default function Inmersiva() {
                 role="dialog"
               >
                 <div className="hotspot__glass" aria-hidden="true">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={active.image} alt="" />
                 </div>
                 <div className="hotspot__eyebrow">{active.eyebrow}</div>
                 <p className="hotspot__title">{active.title}</p>
-                <a href={active.href} className="hotspot__link" data-cursor="grow" onClick={handleDismiss}>
+                <a href={active.href} className="hotspot__link" data-cursor="grow" onClick={handleLink}>
                   Ver más <span aria-hidden="true">→</span>
                 </a>
               </div>
@@ -174,7 +197,7 @@ export default function Inmersiva() {
 
       <div className={`inmersiva__curtain${shut ? ' is-shut' : ''}${closeStage === 'shut' ? ' show-logo' : ''}`}>
         <span className="inmersiva__curtain-circle" aria-hidden="true" />
-        <img className="inmersiva__curtain-logo" src="/logos/rebozaditos.png" alt="" aria-hidden="true" />
+        <Image className="inmersiva__curtain-logo" src="/logos/rebozaditos.png" alt="" aria-hidden="true" width={791} height={395} sizes="260px" />
       </div>
     </section>
   )
