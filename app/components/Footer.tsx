@@ -9,6 +9,9 @@ const LINKS = [
   { href: '/distribuidores', label: 'Distribuidores' },
 ]
 
+// Certificado oficial del Registro Nacional de Establecimientos (provincia de Buenos Aires).
+const RNE_URL = 'https://plataforma.maa.gba.gov.ar/rne/imprimir-certificado/3686'
+
 export default function Footer() {
   return (
     <footer className="footer">
@@ -28,6 +31,7 @@ export default function Footer() {
           {LINKS.map(l => (
             <Link key={l.label} href={l.href}>{l.label}</Link>
           ))}
+          <a href={RNE_URL} target="_blank" rel="noopener noreferrer">Certificado RNE</a>
         </nav>
       </div>
 

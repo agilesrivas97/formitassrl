@@ -14,7 +14,7 @@ export default function Hero() {
           {/* El eyebrow va dentro del H1: así el título que lee Google incluye
               "rebozados congelados" y "Mar del Plata", sin cambiar el diseño */}
           <h1 className="hero__title">
-            <span className="pop-eyebrow hero__eyebrow">Rebozados congelados de calidad · Desde Mar del Plata al mundo</span>
+            <span className="pop-eyebrow hero__eyebrow">Frigorífico y fábrica de rebozados congelados · Mar del Plata</span>
             <span>Fáciles de<br /> preparar.</span>
             <span className="hero__title-alt">Difíciles de<br /> ignorar.</span>
           </h1>

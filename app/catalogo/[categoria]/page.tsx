@@ -6,7 +6,7 @@ import CatalogFull    from '../../components/CatalogFull'
 import Footer         from '../../components/Footer'
 import WhatsAppFloat  from '../../components/WhatsAppFloat'
 import { PRODUCTS } from '../../lib/products'
-import { CATEGORIES, CategoryId, DEFAULT_OG_IMAGE, SITE_URL } from '../../lib/seo'
+import { CATEGORIES, CategoryId, DEFAULT_OG_IMAGE, SITE_URL, breadcrumbJsonLd } from '../../lib/seo'
 
 type Params = { categoria: string }
 
@@ -77,7 +77,11 @@ export default async function CategoriaPage({ params }: { params: Promise<Params
       <WhatsAppFloat />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumbJsonLd([
+          { name: 'Inicio', url: SITE_URL },
+          { name: 'Catálogo', url: `${SITE_URL}/catalogo` },
+          { name: label, url: `${SITE_URL}/catalogo/${categoria}` },
+        ])]) }}
       />
     </>
   )

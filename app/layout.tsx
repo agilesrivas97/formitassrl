@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import { Unbounded, Instrument_Sans, Lilita_One } from 'next/font/google'
 import './globals.css'
-import { BUSINESS, DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, DEFAULT_TITLE, SITE_NAME, SITE_URL } from './lib/seo'
+import { BUSINESS, SEO_KEYWORDS, DEFAULT_DESCRIPTION, DEFAULT_OG_IMAGE, DEFAULT_TITLE, SITE_NAME, SITE_URL } from './lib/seo'
 
 const unbounded = Unbounded({
   subsets: ['latin'],
@@ -33,17 +33,7 @@ export const metadata: Metadata = {
     template: `%s — ${SITE_NAME}`,
   },
   description: DEFAULT_DESCRIPTION,
-  keywords: [
-    'congelados',
-    'rebozados congelados',
-    'rebozados Mar del Plata',
-    'distribuidor congelados AMBA',
-    'nuggets de pollo congelados',
-    'medallones de merluza congelados',
-    'formitas',
-    'rebozaditos pop',
-    'rebodinos',
-  ],
+  keywords: SEO_KEYWORDS,
   alternates: {
     canonical: '/',
   },
@@ -74,7 +64,12 @@ export const metadata: Metadata = {
 const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': ['Organization', 'LocalBusiness'],
+  '@id': `${SITE_URL}/#organization`,
   name: BUSINESS.name,
+  alternateName: ['Formitas', 'Congelados Formitas', 'Rebozaditos Pop'],
+  description: DEFAULT_DESCRIPTION,
+  slogan: 'Fáciles de preparar. Difíciles de ignorar.',
+  knowsAbout: ['rebozados congelados', 'frigorífico', 'distribución mayorista de congelados'],
   url: BUSINESS.url,
   logo: BUSINESS.logo,
   image: `${SITE_URL}${DEFAULT_OG_IMAGE.url}`,
@@ -88,6 +83,16 @@ const organizationJsonLd = {
     '@type': 'AdministrativeArea',
     name: 'Argentina',
   },
+}
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
+  url: SITE_URL,
+  name: SITE_NAME,
+  inLanguage: 'es-AR',
+  publisher: { '@id': `${SITE_URL}/#organization` },
 }
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID
@@ -110,6 +115,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
       <body>

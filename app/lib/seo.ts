@@ -2,10 +2,40 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://congelados
 
 export const SITE_NAME = 'Rebozaditos Pop'
 
-export const DEFAULT_TITLE = 'Rebozaditos Pop — Fábrica de rebozados congelados en Mar del Plata'
+export const DEFAULT_TITLE = 'Frigorífico y fábrica de rebozados congelados en Mar del Plata | Rebozaditos Pop'
 
 export const DEFAULT_DESCRIPTION =
-  'Fábrica de rebozados congelados en Mar del Plata desde 2014: pollo, pescado, mariscos, vegetales y quesos. Buscamos distribuidores mayoristas en todo el país. Una marca de Congelados Formitas SRL.'
+  'Congelados Formitas SRL: frigorífico y fábrica de rebozados congelados en Mar del Plata desde 2014. Pollo, pescado, mariscos, vegetales y quesos. Venta mayorista y distribución a todo el país, con planta habilitada por SENASA.'
+
+export const SEO_KEYWORDS = [
+  'frigorífico Mar del Plata',
+  'frigorífico congelados Mar del Plata',
+  'fábrica de rebozados congelados',
+  'rebozados congelados Mar del Plata',
+  'congelados mayoristas',
+  'distribuidor de congelados',
+  'congelados Formitas',
+  'Rebozaditos Pop',
+  'rebodinos',
+  'nuggets de pollo congelados',
+  'medallones de merluza congelados',
+  'rabas congeladas',
+]
+
+export const BREADCRUMB_HOME = { name: 'Inicio', url: SITE_URL }
+
+export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((it, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: it.name,
+      item: it.url,
+    })),
+  }
+}
 
 export const DEFAULT_OG_IMAGE = {
   url: '/og-image.jpg',
