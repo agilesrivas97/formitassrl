@@ -60,8 +60,9 @@ function layout(opts: { preheader: string; body: string; footerNote: string }) {
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.cream};">
   <tr><td align="center" style="padding:28px 12px;">
     <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:100%;max-width:600px;">
-      <tr><td align="center" style="padding:0 0 18px;">
-        <img src="${SITE_URL}/logos/rebozaditos.png" width="190" alt="Rebozaditos Pop" style="display:block;width:190px;max-width:60%;height:auto;border:0;">
+      <tr><td align="center" style="padding:0 0 20px;">
+        <img src="${SITE_URL}/logos/logo-cara.png" width="84" height="85" alt="Mascota de Rebozaditos Pop" style="display:block;width:84px;height:auto;border:0;margin:0 auto 10px;">
+        <div style="font-family:${FONT};font-size:22px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:${C.navy};">Congelados <span style="color:${C.orange};">Formitas</span></div>
       </td></tr>
       <tr><td style="background:#FFFFFF;border-radius:22px;overflow:hidden;box-shadow:0 8px 24px rgba(8,42,84,.10);">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
