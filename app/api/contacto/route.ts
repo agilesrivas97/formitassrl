@@ -1,5 +1,7 @@
 import { Resend } from 'resend'
 import { HONEYPOT_FIELD, LEAD_ROLES, PROVINCIAS, type LeadRole } from '../../lib/leads'
+import { leadConfirmation, leadNotification } from '../../lib/emails'
+import { WHATSAPP_MESSAGES, whatsappHref } from '../../lib/contact'
 
 // Límite simple por IP: 5 envíos cada 10 minutos. Vive en memoria de cada instancia,
 // alcanza para frenar spam básico; para algo más fuerte usar Vercel Firewall / KV.
@@ -14,10 +16,6 @@ function rateLimited(ip: string) {
   hits.set(ip, recent)
   return recent.length > MAX_PER_WINDOW
 }
-
-// Los datos del formulario van dentro de HTML: hay que escaparlos.
-const escapeHtml = (value: string) =>
-  value.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!)
 
 const clean = (value: unknown, max = 200) =>
   typeof value === 'string' ? value.trim().slice(0, max) : ''
@@ -57,46 +55,50 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Solicitud inválida.' }, { status: 400 })
   }
 
-  const roleLabel = LEAD_ROLES[role]
-  const rows: [string, string][] = [
-    ['Tipo de negocio', roleLabel],
-    ['Nombre', name],
-    ['Empresa', clean(body.company, 120)],
-    ['Teléfono', phone],
-    ['Email', email],
-    ['Provincia', province],
-    ['Ciudad / zona', clean(body.city, 120)],
-    ['Volumen mensual estimado', clean(body.vol, 80)],
-    ['Mensaje', clean(body.msg, 2000)],
-    ['Origen', clean(body.source, 40)],
-  ]
+  const lead = {
+    role,
+    name,
+    company: clean(body.company, 120),
+    phone,
+    email,
+    province,
+    city: clean(body.city, 120),
+    vol: clean(body.vol, 80),
+    msg: clean(body.msg, 2000),
+    source: clean(body.source, 40),
+  }
 
-  // Números argentinos cargados sin código de país ("223 555-1234") → 549 + número para wa.me
-  const digits = phone.replace(/\D/g, '').replace(/^0/, '')
-  const waNumber = digits.startsWith('54') ? digits : `549${digits}`
-  const html = `
-    <h2>Nuevo contacto comercial — ${escapeHtml(roleLabel)}</h2>
-    <table cellpadding="6" cellspacing="0">
-      ${rows
-        .filter(([, value]) => value)
-        .map(([label, value]) => `<tr><td><strong>${label}</strong></td><td>${escapeHtml(value).replace(/\n/g, '<br>')}</td></tr>`)
-        .join('')}
-    </table>
-    <p><a href="https://wa.me/${waNumber}">Responder por WhatsApp</a></p>
-  `
+  const notification = leadNotification(lead)
 
   const resend = new Resend(apiKey)
+  const from = process.env.RESEND_FROM_EMAIL ?? 'Formitas <onboarding@resend.dev>'
   const { error } = await resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL ?? 'Formitas <onboarding@resend.dev>',
+    from,
     to: process.env.RESEND_TO_EMAIL ?? 'info@congeladosformitas.com.ar',
     replyTo: email,
-    subject: `Nuevo ${roleLabel.toLowerCase()} — ${name} (${province})`,
-    html,
+    subject: notification.subject,
+    html: notification.html,
+    text: notification.text,
   })
 
   if (error) {
     console.error('[api/contacto] Resend error:', error)
     return Response.json({ error: 'No se pudo enviar el email.' }, { status: 502 })
+  }
+
+  // Confirmación para quien escribió. Si falla no se corta el flujo: el aviso a la empresa ya salió.
+  // Se puede apagar con RESEND_AUTOREPLY=off.
+  if (process.env.RESEND_AUTOREPLY !== 'off') {
+    const confirmation = leadConfirmation(lead, whatsappHref(WHATSAPP_MESSAGES.distribuidor))
+    const { error: confirmError } = await resend.emails.send({
+      from,
+      to: email,
+      replyTo: process.env.RESEND_TO_EMAIL ?? 'info@congeladosformitas.com.ar',
+      subject: confirmation.subject,
+      html: confirmation.html,
+      text: confirmation.text,
+    })
+    if (confirmError) console.error('[api/contacto] Resend (confirmación) error:', confirmError)
   }
 
   return Response.json({ ok: true })
